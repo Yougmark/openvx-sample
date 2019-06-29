@@ -14,14 +14,15 @@ addons:
             - ubuntu-toolchain-r-test
         packages:
             - lcov
-  
+
 branches:
-  - openvx_1.2
+  - master
+  - dev
 
 before_script:
   - git submodule sync --recursive
   - git submodule update --init --recursive --remote
-   
+
 script:
   - python Build.py --os=Linux --arch=64 --conf=Release --ix --nn
   - python Build.py --os=Linux --arch=64 --conf=Debug --ix --nn
@@ -30,11 +31,11 @@ script:
   - mkdir build-cts
   - cd build-cts
   - cmake -DOPENVX_INCLUDES=$OPENVX_DIR/include -DOPENVX_LIBRARIES=$OPENVX_DIR/bin/libopenvx.so\;$OPENVX_DIR/bin/libvxu.so\;pthread\;dl\;m\;rt -DOPENVX_USE_NN=ON -DOPENVX_USE_IX=ON ../cts/
-  - cmake --build .  
+  - cmake --build .
   - LD_LIBRARY_PATH=./lib ./bin/vx_test_conformance
 
 after_success:
 
 notifications:
   email:
-    - kiritigowda@gmail.com
+    - yougmark94@gmail.com
