@@ -17,7 +17,6 @@ addons:
 
 branches:
   - master
-  - dev
 
 before_script:
   - git submodule sync --recursive
