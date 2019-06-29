@@ -1,4 +1,4 @@
-/* 
+/*
 
  * Copyright (c) 2012-2017 The Khronos Group Inc.
  *
@@ -193,7 +193,7 @@ typedef struct VXBinHeaderS VXBinHeader;
 
 #define USES_OFFSET (sizeof(VXBinHeader))/* Where the variable part of the blob starts */
 
-struct VXBinObjectHeaderS 
+struct VXBinObjectHeaderS
 {
     vx_enum type;
     vx_enum use;
@@ -216,14 +216,14 @@ static vx_enum getObjectType(const vx_uint8 *ptr, vx_uint32 index)
 {
     return checkIndex(ptr, index) ?
         *((const vx_enum *)(((const vx_uint8 *)ptr) + getOffsets(ptr)[index])) :
-        VX_TYPE_INVALID;    
+        VX_TYPE_INVALID;
 }
 
 static const vx_char *getObjectName(const vx_uint8 *ptr, vx_uint32 index)
 {
     return checkIndex(ptr, index) ?
         ((const vx_char *)(((const vx_uint8 *)ptr) + getOffsets(ptr)[index] + 2 * sizeof(vx_enum))) :
-        "";    
+        "";
 }
 
 static vx_status importObject(vx_context context, const vx_uint8 *ptr, vx_reference *ref_table, vx_uint32 n);
@@ -489,7 +489,7 @@ static vx_status importImage(vx_context context, const vx_uint8 *ptr, vx_referen
                     importVxUint32(&header, &rect.end_x);
                     importVxUint32(&header, &rect.end_y);
                     status = vxSetImageValidRectangle(image, &rect);
-                    DEBUGPRINTF("Importing image data for rect (start_x=%u, end_x=%u, start_y=%u, end_y=%u)\n", 
+                    DEBUGPRINTF("Importing image data for rect (start_x=%u, end_x=%u, start_y=%u, end_y=%u)\n",
                                 rect.start_x, rect.end_x, rect.start_y, rect.end_y);
                     for (p = 0U; p < image->planes && VX_SUCCESS == status; ++p)
                     {
@@ -572,7 +572,7 @@ static vx_status importImage(vx_context context, const vx_uint8 *ptr, vx_referen
 
 static vx_status importLUT(vx_context context, const vx_uint8 *ptr, vx_reference *ref_table, vx_uint32 n)
 {
-    /* 
+    /*
     LUT format:
     vx_uint32 num_items
     vx_enum item_type
@@ -871,7 +871,7 @@ static vx_status importConvolution(vx_context context, const vx_uint8 *ptr, vx_r
 
 static vx_status importScalar(vx_context context, const vx_uint8 *ptr, vx_reference *ref_table, vx_uint32 n)
 {
-    /* 
+    /*
     Format:
         vx_enum data_type
         vx_uint32 item_size
@@ -943,7 +943,7 @@ static vx_status importScalar(vx_context context, const vx_uint8 *ptr, vx_refere
 
 static vx_status importArray(vx_context context, const vx_uint8 *ptr, vx_reference *ref_table, vx_uint32 n)
 {
-    /* 
+    /*
     Array format:
         vx_uint32 num_items
         vx_uint32 capacity
@@ -1010,7 +1010,7 @@ static vx_status importArray(vx_context context, const vx_uint8 *ptr, vx_referen
 
 static vx_status importRemap(vx_context context, const vx_uint8 *ptr, vx_reference *ref_table, vx_uint32 n)
 {
-    /* 
+    /*
     Remap format:
     vx_uint32 src_width
     vx_uint32 src_height
@@ -1081,12 +1081,12 @@ static vx_status importObjectArray(vx_context context, const vx_uint8 *ptr, vx_r
     status = importObjectHeader(ptr, &header, n);
     importVxUint32(&header, &num_items);
     importVxEnum(&header, &parent_type);
-    
+
     if (required_type != parent_type)
     {
         return status;      /* quick exit if we don't want to import this at present */
     }
-    
+
     if (NULL == ref_table[n])
     {
         if (VX_TYPE_TENSOR == parent_type)
@@ -1214,7 +1214,7 @@ static vx_status importPyramid(vx_context context, const vx_uint8 *ptr, vx_refer
         {
             if (checkIndex(ptr, header.scope))
             {
-                ref_table[n] = (vx_reference)vxCreateVirtualPyramid((vx_graph)ref_table[header.scope], num_levels, 
+                ref_table[n] = (vx_reference)vxCreateVirtualPyramid((vx_graph)ref_table[header.scope], num_levels,
                                                                 scale, width, height, format);
             }
         }
@@ -1302,7 +1302,7 @@ static vx_status importDelay(vx_context context, const vx_uint8 *ptr, vx_referen
     {
         /* import each object - note that as they have already been created, only a meta-data check and
         data import will be done.  We do not increment the reference count for the objects in the slots;
-        they will be incremented if and only if they are on the export list, at the end of the main function. 
+        they will be incremented if and only if they are on the export list, at the end of the main function.
         */
         vx_uint32 object_ix;
         importVxUint32(&header, &object_ix);
@@ -1443,7 +1443,7 @@ static vx_status importKernel(vx_context context, const vx_uint8 *ptr, vx_refere
                 vx_enum state
             end_struct params[num_kernel_params]
             vx_uint32 graph_index               # Only for 'graph kernels' with VX_IX_USE_IMPORT_AS_KERNEL (Bugzilla 16207)
-            
+
     This function is called twice for each kernel, once with required_use == VX_IX_USE_APPLICATION_CREATE and once with VX_IX_USE_IMPORT_AS_KERNEL.
     This is because in the first case the kernels are required before graphs are built, and in the second graphs must be built before the
     kernel can be created.
@@ -1633,21 +1633,21 @@ static vx_status buildGraphs(vx_context context, const vx_uint8 *ptr, vx_referen
     {
         /* Format of data:
             vx_uint32 num_delays
-            vx_uint32 delays[num_delays]        # indices into offsets table 
+            vx_uint32 delays[num_delays]        # indices into offsets table
             vx_uint32 num_nodes
             struct
-                vx_uint32 kernel_index          # index into offsets table for the kernel 
+                vx_uint32 kernel_index          # index into offsets table for the kernel
                 vx_uint32 params[num_kernel_params]    # num_kernel_params from the kernel entry
                                                 # index into offsets table for each parameter;
-                                                # 0xFFFFFFFF is used for absent optional parameters 
+                                                # 0xFFFFFFFF is used for absent optional parameters
                 vx_uint8 is_replicated flag
                 case is_replicated of
-                0:                              # no data 
-                
-                default:                        # non-zero or true value 
+                0:                              # no data
+
+                default:                        # non-zero or true value
                     vx_uint8 replicated flags[num_params]
-                end_case 
-                vx_uint32 affinity              # note sample implementation has illegal zero affinity 
+                end_case
+                vx_uint32 affinity              # note sample implementation has illegal zero affinity
                 vx_border_t border mode
             end_struct nodes[num_nodes]
             vx_uint32 num_graph_params
@@ -1776,7 +1776,7 @@ static vx_status buildGraphs(vx_context context, const vx_uint8 *ptr, vx_referen
                             status = VX_ERROR_INVALID_PARAMETERS;
                         importVxUint32(&header, &(g->parameters[c].index));
                     }
-                }              
+                }
                 if (NULL == header.curptr)
                     status = VX_FAILURE;
             }
@@ -1831,9 +1831,9 @@ static vx_status buildGraphs(vx_context context, const vx_uint8 *ptr, vx_referen
 }
 
 VX_API_ENTRY vx_import VX_API_CALL vxImportObjectsFromMemory(
-    vx_context context,  
-    vx_size numrefs,     
-    vx_reference *refs,  
+    vx_context context,
+    vx_size numrefs,
+    vx_reference *refs,
     const vx_enum * uses,
     const vx_uint8 * ptr,
     vx_size length)
@@ -1859,8 +1859,8 @@ VX_API_ENTRY vx_import VX_API_CALL vxImportObjectsFromMemory(
         length != header->length ||
         numrefs != header->numrefs ||
         header->actual_numrefs < header->numrefs ||
-        length <= sizeof(VXBinHeader) + 
-            numrefs * sizeof(vx_enum) + 
+        length <= sizeof(VXBinHeader) +
+            numrefs * sizeof(vx_enum) +
             header->actual_numrefs * sizeof(vx_uint64)
         )
     {
@@ -1878,7 +1878,7 @@ VX_API_ENTRY vx_import VX_API_CALL vxImportObjectsFromMemory(
                 DEBUGPRINTF("Uses don't match or refs invalid\n");
                 status = VX_ERROR_INVALID_PARAMETERS;
             }
-        }       
+        }
     }
     if (VX_SUCCESS == status)
     {

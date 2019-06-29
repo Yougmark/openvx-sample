@@ -27,7 +27,7 @@ vx_status vxNonMaxSuppression(vx_image input, vx_image mask, vx_scalar win_size,
     void *src_base = NULL;
     void *mask_base = NULL;
     void *dst_base = NULL;
-    
+
     vx_imagepatch_addressing_t src_addr = VX_IMAGEPATCH_ADDR_INIT;
     vx_imagepatch_addressing_t dst_addr = VX_IMAGEPATCH_ADDR_INIT;
     vx_imagepatch_addressing_t mask_addr = VX_IMAGEPATCH_ADDR_INIT;
@@ -114,7 +114,7 @@ vx_status vxNonMaxSuppression(vx_image input, vx_image mask, vx_scalar win_size,
                     if (format == VX_DF_IMAGE_U8)
                         *(vx_uint8 *)dest = (vx_uint8)src_val;
                     else
-                        *(vx_int16 *)dest = (vx_int16)src_val;        
+                        *(vx_int16 *)dest = (vx_int16)src_val;
                 }
                 else
                 {

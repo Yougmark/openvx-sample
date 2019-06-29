@@ -38,7 +38,7 @@ vx_status TransposeTensorKernelImpl(
     vx_size out_size = ComputeNumberOfElements(out_dims, out_dim_num);
 
     //TODO: check params values! overfloat (and rounding for MUL) are ignored atm!!!
-    
+
     // This doesn't apply to a JIT/ parametrized AOT like OCL but,
     // The #if below compares the naive version with hoisting the conditions out of the loop.
     // Further splitting can be done for the no-broadcast case (equal dims) and especially for the

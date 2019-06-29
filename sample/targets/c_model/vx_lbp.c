@@ -1,4 +1,4 @@
-/* 
+/*
 
  * Copyright (c) 2012-2017 The Khronos Group Inc.
  *
@@ -169,7 +169,7 @@ static vx_status VX_CALLBACK vxLBPInputValidator(vx_node node, vx_uint32 index)
 }
 
 static vx_status VX_CALLBACK vxLBPOutputValidator(vx_node node, vx_uint32 index, vx_meta_format_t *ptr)
-{   
+{
     vx_status status = VX_ERROR_INVALID_PARAMETERS;
     if (index == 3)
     {

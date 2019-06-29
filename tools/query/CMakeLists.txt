@@ -23,14 +23,14 @@ include_directories( BEFORE
                      ${VX_HEADER_DIR}
                      )
 
-FIND_SOURCES()					 
-					 
+FIND_SOURCES()
+
 # add a target named ${TARGET_NAME}
 add_executable (${TARGET_NAME} ${SOURCE_FILES})
 
 target_link_libraries( ${TARGET_NAME} openvx-helper openvx vxu )
 
-install ( TARGETS ${TARGET_NAME} 
+install ( TARGETS ${TARGET_NAME}
           RUNTIME DESTINATION bin
           ARCHIVE DESTINATION bin
           LIBRARY DESTINATION bin )

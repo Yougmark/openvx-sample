@@ -1,4 +1,4 @@
-/* 
+/*
 
  * Copyright (c) 2012-2017 The Khronos Group Inc.
  *
@@ -599,7 +599,7 @@ VX_API_ENTRY vx_status VX_API_CALL vxReplicateNode(vx_graph graph, vx_node first
 			vxReleaseParameter(&param);
 		}
 	}
-	
+
 	if (VX_SUCCESS == status)
 	{
 		/* set replicate flag for node */
@@ -610,7 +610,7 @@ VX_API_ENTRY vx_status VX_API_CALL vxReplicateNode(vx_graph graph, vx_node first
 			first_node->replicated_flags[n] = replicate[n];
 		}
 	}
-    
+
 	return status;
 }
 

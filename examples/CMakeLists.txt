@@ -20,7 +20,7 @@ include_directories( BEFORE
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${VX_HEADER_DIR}
     )
-					 
+
 # set target name
 set( TARGET_NAME_XYZ_LIB vx_xyz_lib )
 # set target name
@@ -81,7 +81,7 @@ install ( TARGETS ${TARGET_NAME_XYZ_LIB} ${TARGET_NAME_XYZ} ${TARGET_NAME_EXAMPL
           RUNTIME DESTINATION bin
           ARCHIVE DESTINATION bin
           LIBRARY DESTINATION bin )
-		  
+
 set_target_properties( ${TARGET_NAME_XYZ_LIB} PROPERTIES FOLDER ${EXAMPLES_FOLDER} )
 set_target_properties( ${TARGET_NAME_XYZ} PROPERTIES FOLDER ${EXAMPLES_FOLDER} )
 set_target_properties( ${TARGET_NAME_EXAMPLE} PROPERTIES FOLDER ${EXAMPLES_FOLDER} )

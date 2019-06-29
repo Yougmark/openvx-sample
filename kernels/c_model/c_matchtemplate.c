@@ -37,7 +37,7 @@ vxInvSqrt64d( double arg )
 
     floatbits.t = (float) arg;
     floatbits.u = (_SQRT_MAGIC - floatbits.u) >> 1;
-    
+
     y = arg * 0.5;
     x = floatbits.t;
     x *= 1.5 - y * x * x;

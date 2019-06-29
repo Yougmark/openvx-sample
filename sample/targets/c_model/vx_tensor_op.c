@@ -150,7 +150,7 @@ vx_status VX_CALLBACK tensorMultiplyKernel(vx_node node, const vx_reference *par
                 in1,
                 scale_sc,
                 overflow_sc,
-                rounding_sc,  
+                rounding_sc,
                 out);
     }
 
@@ -259,7 +259,7 @@ static vx_status CalculateOutputDimensions (vx_size* in1_dim, vx_size* in2_dim, 
         {
             out_dim_calculated[i] = in1_dim[i];
         }
-        else if (in1_dim[i] == 1 || in2_dim[i] == 1)    //TODO: what do we reall want to do here? 
+        else if (in1_dim[i] == 1 || in2_dim[i] == 1)    //TODO: what do we reall want to do here?
         {
             out_dim_calculated[i] = in2_dim[i] > in1_dim[i] ? in2_dim[i] : in1_dim[i];
         }

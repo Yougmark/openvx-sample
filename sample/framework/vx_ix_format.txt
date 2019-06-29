@@ -20,9 +20,9 @@
 # previously, or a constant.
 # The names of the data elements are valid only within their bounding scope, which may be within a struct..
 # end_struct sequence, between colons or between the last colon and end_case in a variant, or at file level.
-# 
+#
 # The format used for the first sample implementation of the IX extension is very simplistic and non-optimal.
-# It consists of a header, the set of "uses" supplied by the application upon export, a list of indices and 
+# It consists of a header, the set of "uses" supplied by the application upon export, a list of indices and
 # then exported objects for each of the listed indices. The files 'vx_ix_export.c' and 'vx_ix_import.c' contain
 # the code implementing the export and import interfaces, separated so that vx_ix_import may be used on its
 # own for the SC deployment feature set.
@@ -31,19 +31,19 @@
 # At the start are 24 bytes formatted as follows:
 
     vx_uint32 vx_ix_id                  # Unique ID, must match on import
-    vx_uint32 version                   # Version of the export/import; importing application must support version 
-    vx_uint64 length                    # Total length of the blob 
-    vx_uint32 numrefs                   # Number of references originally supplied 
-    vx_uint32 actual_numrefs            # Actual number of references exported 
+    vx_uint32 version                   # Version of the export/import; importing application must support version
+    vx_uint64 length                    # Total length of the blob
+    vx_uint32 numrefs                   # Number of references originally supplied
+    vx_uint32 actual_numrefs            # Actual number of references exported
 #
 # Note that 'actual_numrefs' is calculated by the export function that works out what objects must be exported
 # to support the objects requested by the application initially (actual_numrefs >= numrefs). Only the first numrefs
 # objects will be visible to an importing application.
-# 
+#
 # These 24 bytes are followed by the 'uses' array supplied by the application at export time, and this takes up a
 # total of numrefs * 4 bytes:
 
-    vx_uint32 uses[numrefs]             # 'uses' array supplied by exporting application 
+    vx_uint32 uses[numrefs]             # 'uses' array supplied by exporting application
 #
 # The 'uses' are followed immediately by a set of indices into the rest of the data, one for each of the actual_numrefs
 # objects identified by the export function. These indices are each 64-bits in length and are the offset into the
@@ -55,15 +55,15 @@
 # actual_numrefs + VX_TYPE_PYRAMID      indicates a pyramid that is not being exported
 # actual_numrefs + VX_TYPE_OBJECT_ARRAY indicates an object array that is not being exported
 
-    vx_uint64 offsets[actual_numrefs]   # indices into the data for each required reference 
+    vx_uint64 offsets[actual_numrefs]   # indices into the data for each required reference
 #
 # Following the offsets are the data blobs for each individual reference. Each object starts with a header as follows:
 
     struct
-        vx_enum type                        # Type of the object (one of the VX_TYPE_XXX constants) 
-        vx_enum use                         # use supplied by exporting appication or calculated by export function 
-        char name[VX_MAX_REFERENCE_NAME]    # name of the object (from vxSetReferenceName) 
-        vx_uint8 is_virtual                 # zero for non-virtual objects 
+        vx_enum type                        # Type of the object (one of the VX_TYPE_XXX constants)
+        vx_enum use                         # use supplied by exporting appication or calculated by export function
+        char name[VX_MAX_REFERENCE_NAME]    # name of the object (from vxSetReferenceName)
+        vx_uint8 is_virtual                 # zero for non-virtual objects
         vx_uint32 scope                     # index into the offsets table for the scope of this object, or special value
 
     # Following the object header is the rest of the object, the format being determined by the type of the object, as
@@ -74,95 +74,95 @@
         VX_TYPE_IMAGE:
 
             # The format for an image is variable, determined by the value of a sub-type stored in the first byte following the
-            # object header: 
+            # object header:
 
-            vx_uint8 image_sub_type             # determines the rest of the image format 
-            
+            vx_uint8 image_sub_type             # determines the rest of the image format
+
             case image_sub_type of
-            
+
             IMAGE_SUB_TYPE_ROI:
-                                                # parent of this image is the object scope 
-                vx_uint32 start_x               # values for rect defining ROI 
-                vx_uint32 start_y 
-                vx_uint32 end_x 
-                vx_uint32 end_y 
-                
+                                                # parent of this image is the object scope
+                vx_uint32 start_x               # values for rect defining ROI
+                vx_uint32 start_y
+                vx_uint32 end_x
+                vx_uint32 end_y
+
             IMAGE_SUB_TYPE_CHANNEL:
-                                                # parent of this image is the object scope 
-                vx_uint32 channel               # VX_CHANNEL_Y, VX_CHANNEL_U, or VX_CHANNEL_V 
-                
+                                                # parent of this image is the object scope
+                vx_uint32 channel               # VX_CHANNEL_Y, VX_CHANNEL_U, or VX_CHANNEL_V
+
             IMAGE_SUB_TYPE_UNIFORM:
-            
-                vx_uint32 width                 # width in pixels of uniform image 
-                vx_uint32 height                # height in pixels 
-                vx_df_image format              # one of the VX_DF_IMAGE_ constants 
-                # Pixel data follows, which is of variable length determined by the image format 
+
+                vx_uint32 width                 # width in pixels of uniform image
+                vx_uint32 height                # height in pixels
+                vx_df_image format              # one of the VX_DF_IMAGE_ constants
+                # Pixel data follows, which is of variable length determined by the image format
                 case format of
-                VX_DF_IMAGE_U8:                 # single-plane 1 byte 
-                    vx_uint8 pixel_u8 
-                VX_DF_IMAGE_U16:                # single-plane U16 
+                VX_DF_IMAGE_U8:                 # single-plane 1 byte
+                    vx_uint8 pixel_u8
+                VX_DF_IMAGE_U16:                # single-plane U16
                     vx_uint16 pixel_u16
-                VX_DF_IMAGE_S16:                # single-plane S16 
+                VX_DF_IMAGE_S16:                # single-plane S16
                     vx_int16 pixel_s16
-                VX_DF_IMAGE_U32:                # single-plane U32 
+                VX_DF_IMAGE_U32:                # single-plane U32
                     vx_uint32 pixel_u32
-                VX_DF_IMAGE_S32:                # single-plane S32 
+                VX_DF_IMAGE_S32:                # single-plane S32
                     vx_int32 pixel_s32
-                VX_DF_IMAGE_RGB:                # single-plane 3 bytes 
+                VX_DF_IMAGE_RGB:                # single-plane 3 bytes
                     vx_uint8 pixel_rgb[3]
-                VX_DF_IMAGE_RGBX:               # single-plane 4 bytes 
+                VX_DF_IMAGE_RGBX:               # single-plane 4 bytes
                     vx_uint8 pixel_rgbx[4]
-                VX_DF_IMAGE_YUV4,               # 3-plane 1 byte 
+                VX_DF_IMAGE_YUV4,               # 3-plane 1 byte
                 VX_DF_IMAGE_IYUV,
                 VX_DF_IMAGE_UYVY,               # single plane, export 3 bytes for YUV mapping UY0VY1 -> YUV
-                VX_DF_IMAGE_YUYV,               # single plane, export 3 bytes for YUV mapping Y0UY1V to YUV 
-                VX_DF_IMAGE_NV12,               # export 1 byte from 1st plane (Y) and 2 from second 
-                VX_DF_IMAGE_NV21:               # second plane UV order is different for the two formats 
+                VX_DF_IMAGE_YUYV,               # single plane, export 3 bytes for YUV mapping Y0UY1V to YUV
+                VX_DF_IMAGE_NV12,               # export 1 byte from 1st plane (Y) and 2 from second
+                VX_DF_IMAGE_NV21:               # second plane UV order is different for the two formats
                     vx_uint8 pixel_YUV[3]
                 end_case
-                
+
             IMAGE_SUB_TYPE_HANDLE:
-                vx_uint32 width                 # width in pixels of uniform image 
-                vx_uint32 height                # height in pixels 
-                vx_df_image format              # one of the VX_DF_IMAGE_ constants 
+                vx_uint32 width                 # width in pixels of uniform image
+                vx_uint32 height                # height in pixels
+                vx_df_image format              # one of the VX_DF_IMAGE_ constants
                 vx_uint32 planes                # number of planes in the image
                 vx_enum memory_type             # The memory type used to create the image
                 struct
                     vx_int32 stride_x           # The stride in the x dimension for this plane
                     vx_int32 stride_y           # The stride in the y direction for this plane
                 end_struct strides[planes]
-                
+
             IMAGE_SUB_TYPE_NORMAL:
-                vx_uint32 width                 # width in pixels of uniform image 
-                vx_uint32 height                # height in pixels 
-                vx_df_image format              # one of the VX_DF_IMAGE_ constants 
-                vx_uint8 data_flag              # Flag specifying if data follows 
+                vx_uint32 width                 # width in pixels of uniform image
+                vx_uint32 height                # height in pixels
+                vx_df_image format              # one of the VX_DF_IMAGE_ constants
+                vx_uint8 data_flag              # Flag specifying if data follows
 
                 case data_flag of
                 1:
-                    vx_uint32 start_x           # values for rect defining valid region 
-                    vx_uint32 start_y           # data is output only for valid region 
-                    vx_uint32 end_x 
-                    vx_uint32 end_y 
+                    vx_uint32 start_x           # values for rect defining valid region
+                    vx_uint32 start_y           # data is output only for valid region
+                    vx_uint32 end_x
+                    vx_uint32 end_y
                     # The data following is formatted according to the value of 'format'.
                     # For example please see the import example in the function import_image
-                    # in the file vx_ix_import.c, starting at line 346 
+                    # in the file vx_ix_import.c, starting at line 346
                     case format of
-                    VX_DF_IMAGE_U8:             # single-plane 1 byte 
+                    VX_DF_IMAGE_U8:             # single-plane 1 byte
                         vx_uint8 pixel_u8[end_y - start_y][end_x - start_x]
-                    VX_DF_IMAGE_U16:            # single-plane U16 
+                    VX_DF_IMAGE_U16:            # single-plane U16
                         vx_uint16 pixel_u16[end_y - start_y][end_x - start_x]
-                    VX_DF_IMAGE_S16:            # single-plane S16 
+                    VX_DF_IMAGE_S16:            # single-plane S16
                         vx_int16 pixel_s16[end_y - start_y][end_x - start_x]
-                    VX_DF_IMAGE_U32:            # single-plane U32 
+                    VX_DF_IMAGE_U32:            # single-plane U32
                         vx_uint32 pixel_u32[end_y - start_y][end_x - start_x]
-                    VX_DF_IMAGE_S32:            # single-plane S32 
+                    VX_DF_IMAGE_S32:            # single-plane S32
                         vx_int32 pixel_s32[end_y - start_y][end_x - start_x]
-                    VX_DF_IMAGE_RGB:            # single-plane 3 bytes 
+                    VX_DF_IMAGE_RGB:            # single-plane 3 bytes
                         vx_uint8 pixel_rgb[end_y - start_y][end_x - start_x][3]
-                    VX_DF_IMAGE_RGBX:           # single-plane 4 bytes 
+                    VX_DF_IMAGE_RGBX:           # single-plane 4 bytes
                         vx_uint8 pixel_rgbx[end_y - start_y][end_x - start_x][4]
-                    VX_DF_IMAGE_YUV4:           # 3-plane 1 byte 
+                    VX_DF_IMAGE_YUV4:           # 3-plane 1 byte
                         vx_uint8 pixel_rgb[3][end_y - start_y][end_x - start_x]
                     VX_DF_IMAGE_IYUV:
                         vx_uint8 pixel_Y[end_y - start_y][end_x - start_x]
@@ -171,7 +171,7 @@
                     VX_DF_IMAGE_UYVY, VX_DF_IMAGE_YUYV:
                         vx_uint8 pixel_YUVY[2][end_y - start_y][end_x - start_x]
                     VX_DF_IMAGE_NV12,
-                    VX_DF_IMAGE_NV21:           # second plane UV order is different for the two formats 
+                    VX_DF_IMAGE_NV21:           # second plane UV order is different for the two formats
                         vx_uint8 pixel_Y[end_y - start_y][end_x - start_x]
                         vx_uint8 pixel_UV[(end_y - start_y) / 2][(end_x - start_x) / 2]
                     end_case
@@ -181,7 +181,7 @@
                 # No more information for an image from tensor. All required information is exported in the
                 # object_array object that is the scope of the image, exported in the header
             end_case
-            
+
         VX_TYPE_LUT:
             vx_uint32 num_items
             vx_enum item_type
@@ -196,7 +196,7 @@
             vx_uint32 size
             vx_uint8 data[size]
 
-        VX_TYPE_THRESHOLD: 
+        VX_TYPE_THRESHOLD:
             vx_enum thresh_type
             vx_enum data_type
             vx_int32 value
@@ -258,19 +258,19 @@
             vx_enum parent_type
             case parent_type of
             VX_TYPE_TENSOR:
-                # Used for object arrays of images created from tensor 
-                vx_uint32 tensor_reference  # index into offset table for the tensor object 
+                # Used for object arrays of images created from tensor
+                vx_uint32 tensor_reference  # index into offset table for the tensor object
                 vx_uint32 stride
                 vx_uint32 start_x
                 vx_uint32 start_y
                 vx_uint32 end_x
                 vx_uint32 end_y
                 vx_df_image format
-                
+
             VX_TYPE_INVALID:
-                # no data, used for all other object arrays 
+                # no data, used for all other object arrays
             end_case
-            vx_uint32 indices[num_items]    # indices into offsets table for all the objects in the array 
+            vx_uint32 indices[num_items]    # indices into offsets table for all the objects in the array
 
         VX_TYPE_PYRAMID:
             vx_uint32 width
@@ -278,11 +278,11 @@
             vx_df_image format
             vx_float32 scale
             vx_uint32 num_levels
-            vx_uint32 levels[num_levels]    # indices into offsets table for all pyramid levels 
+            vx_uint32 levels[num_levels]    # indices into offsets table for all pyramid levels
 
         VX_TYPE_DELAY:
             vx_uint32 num_slots
-            vx_uint32 indices[num_slots]    # indices into offsets table for each delay slot object 
+            vx_uint32 indices[num_slots]    # indices into offsets table for each delay slot object
 
         VX_TYPE_TENSOR:
             vx_uint32 number_of_dimensions
@@ -296,20 +296,20 @@
 
         VX_TYPE_GRAPH:
             vx_uint32 num_delays
-            vx_uint32 delays[num_delays]        # indices into offsets table 
+            vx_uint32 delays[num_delays]        # indices into offsets table
             vx_uint32 num_nodes
             struct
-                vx_uint32 kernel_index          # index into offsets table for the kernel 
+                vx_uint32 kernel_index          # index into offsets table for the kernel
                 vx_uint32 params[num_kernel_params]    # num_kernel_params from the kernel entry
                                                 # index into offsets table for each parameter;
-                                                # 0xFFFFFFFF is used for absent optional parameters 
+                                                # 0xFFFFFFFF is used for absent optional parameters
                 vx_uint8 is_replicated flag
                 case is_replicated of
-                0:                              # no data 
-                
-                default:                        # non-zero or true value 
+                0:                              # no data
+
+                default:                        # non-zero or true value
                     vx_uint8 replicated flags[num_params]
-                end_case 
+                end_case
                 vx_uint32 affinity
                 vx_border_t border mode
             end_struct nodes[num_nodes]
@@ -318,7 +318,7 @@
                 vx_uint32 node_reference
                 vx_uint32 parameter_index
             end_struct graph_params[num_graph_params]
-            
+
         VX_TYPE_KERNEL:
             vx_enum enumeration                 # kernel enumeration value
             vx_char[VX_MAX_KERNEL_NAME] name    # kernel name
@@ -328,9 +328,9 @@
                 vx_enum type
                 vx_enum state
             end_struct params[num_kernel_params]
-        
+
         default:
-        
+
         end_case
     end_struct data_objects[actual_numrefs]
     vx_uint32 checksum                          # Sum of all bytes in the export excluding these 4.

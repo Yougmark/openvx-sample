@@ -1,4 +1,4 @@
-/* 
+/*
 
  * Copyright (c) 2012-2017 The Khronos Group Inc.
  *
@@ -160,7 +160,7 @@ static vx_status bilateralFilter_16(void* src, vx_size* src_strides, vx_size* di
         }
         *dst_ptr = (vx_int16) round(sum/wsum);
     }
-    
+
     free(space_weight);
     free(color_weight);
     return status;

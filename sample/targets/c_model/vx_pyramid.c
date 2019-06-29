@@ -1,4 +1,4 @@
-/* 
+/*
 
  * Copyright (c) 2012-2017 The Khronos Group Inc.
  *
@@ -614,7 +614,7 @@ static vx_status VX_CALLBACK vxGaussianPyramidInitializer(vx_node node, const vx
                 vx_node  stmp = vxScaleImageNode(subgraph, virt, tmp1, interp);
 
                 border.mode = VX_BORDER_REPLICATE;
-                
+
                 status |= vxSetNodeAttribute(gtmp, VX_NODE_BORDER, &border, sizeof(border));
 
                 /* decrements the references */
@@ -892,7 +892,7 @@ static vx_status VX_CALLBACK vxLaplacianPyramidInitializer(vx_node node, const v
         status |= vxQueryPyramid(laplacian, VX_PYRAMID_LEVELS, &levels, sizeof(levels));
 
         status |= vxQueryNode(node, VX_NODE_BORDER, &border, sizeof(border));
-        
+
         border.mode = VX_BORDER_REPLICATE;
 
         vxSetContextAttribute(context, VX_CONTEXT_IMMEDIATE_BORDER, &border, sizeof(border));

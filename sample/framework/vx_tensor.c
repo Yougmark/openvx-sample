@@ -140,7 +140,7 @@ VX_API_ENTRY vx_object_array VX_API_CALL vxCreateImageObjectArrayFromTensor(vx_t
     (void)stride;
 
 	vx_object_array images = (vx_object_array)ownCreateReference(tensor->base.context, VX_TYPE_OBJECT_ARRAY, VX_EXTERNAL, (vx_reference)tensor->base.context);//  TODO scope?
-    
+
     if ((rect->end_x <= rect->start_x) ||
         (rect->end_y <= rect->start_y))
     {
@@ -489,7 +489,7 @@ VX_API_ENTRY vx_status VX_API_CALL vxCopyTensorPatch(vx_tensor tensor, vx_size n
         goto exit;
 
     }
-    if (CheckSizes(tensor->dimensions, view_start, view_end, number_of_dimensions) != 0) 
+    if (CheckSizes(tensor->dimensions, view_start, view_end, number_of_dimensions) != 0)
     {
         VX_PRINT(VX_ZONE_ERROR, "Invalid view\n");
         status = VX_ERROR_INVALID_PARAMETERS;

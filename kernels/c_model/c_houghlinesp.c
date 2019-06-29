@@ -19,7 +19,7 @@
 #include <c_model.h>
 
 #define VX_PI   3.1415926535897932384626433832795
-static vx_uint64 state = 0xffffffff; 
+static vx_uint64 state = 0xffffffff;
 
 vx_int32 vxRound(vx_float64 value)
 {
@@ -70,7 +70,7 @@ vx_status vxHoughLinesP(vx_image img, vx_array param_hough_lines_array, vx_array
 
     status = vxGetValidRegionImage(img, &src_rect);
     status |= vxAccessImagePatch(img, &src_rect, 0, &src_addr, (void **)&src_base, VX_READ_AND_WRITE);
-    
+
     width = src_addr.dim_x;
     height = src_addr.dim_y;
 
@@ -84,7 +84,7 @@ vx_status vxHoughLinesP(vx_image img, vx_array param_hough_lines_array, vx_array
     vx_array mask = vxCreateArray(context_houghlines_internal, VX_TYPE_UINT8, width * height);
     vx_array trigtab = vxCreateArray(context_houghlines_internal, VX_TYPE_FLOAT32, numangle * 2);
     vx_array nzloc = vxCreateArray(context_houghlines_internal, VX_TYPE_COORDINATES2D, width * height);
- 
+
     vx_size accum_stride = 0;
     void *accum_ptr = NULL;
     vx_map_id accum_map_id;
