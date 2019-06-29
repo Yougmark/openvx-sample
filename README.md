@@ -1,3 +1,5 @@
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build Status](https://travis-ci.org/Yougmark/openvx.svg?branch=master)](https://travis-ci.org/Yougmark/openvx)
 ========================================================================
 OpenVX 1.2 Sample Implementation
 ========================================================================
@@ -5,14 +7,15 @@ This document outlines the purpose of this sample implementation as well
 as provide build and execution instructions.
 
 CONTENTS:
-1   PURPOSE
-2   BUILDING & EXECUTING
-    2.1 CMAKE
-    2.2 Concerto
-3   INCLUDED UNIT TESTS
-4   DEBUGGING
-5   PACKAGING and INSTALLING
-6   BUG REPORTING
+
+1. PURPOSE
+2. BUILDING & EXECUTING
+    1. CMAKE
+    2. Concerto
+3. INCLUDED UNIT TESTS
+4. DEBUGGING
+5. PACKAGING and INSTALLING
+6. BUG REPORTING
 
 
 1   PURPOSE:
@@ -89,7 +92,7 @@ Building:
     From VS / Cygwin command prompt:
 
     > python Build.py --help
-	
+
     In case of Visual Studio solution, the default CMAKE_GENERATOR is "Visual Studio 12", you can change it with --gen option. (cmake --help present the supported generators)
 
     Linux:
@@ -116,7 +119,7 @@ Building:
     OS - Win / Linux / Android. (Cygwin is equal to Linux)
     ARCH - 32 / 64
     CONF - Release / Debug.
-	
+
     Enable / Disable experimental options (Optional):
     -------------------------------------------------
 	Windows:
@@ -128,7 +131,7 @@ Building:
         (3) Select the options to enable / disable
         (4) Click the 'Configure' button in order to update the "CMakeCache.txt" file (Do not click on 'Generate' button)
         (5) Re-run the python script. (You can set --build=true or build from Visual Studio)
-		
+
         Linux:
         ------
         (1) Run the python script, set --build=false
@@ -217,10 +220,10 @@ installation directory (e.g., "openvx_sample").
     $ cd openvx_sample
     $ make
 
-Outputs are placed in 
+Outputs are placed in
 
     out/$(TARGET_OS)/$(TARGET_CPU)/$(TARGET_BUILD)/
-    
+
 These variables are visible in the make output. This will be referred to
 as TARGET_OUT, though this may not be present in the actual environment
 (users could define this themselves).
@@ -314,12 +317,12 @@ vx_bug13518:
 ------------------------------------------------------------------------
 
 To build in debug mode (this will output in the out/.../debug folder rather
-than out/.../release, thus if you defined TARGET_OUT, you'll have to change it. 
+than out/.../release, thus if you defined TARGET_OUT, you'll have to change it.
 
     $ export NO_OPTIMIZE=1
     $ make
 
-or 
+or
 
     $ make TARGET_BUILD=debug
 
@@ -328,7 +331,7 @@ list of zones to enable. In the mask, the zones are the bit places. Express the
 mask as a hex number.
 
     $ export VX_ZONE_MASK=0x<hexnumber>
-    
+
 or use the list as a comma delimited set of zone numbers (see 'sample/include/vx_debug.h')
 
     $ export VX_ZONE_LIST=0,1,2,3,6,9,14
@@ -344,7 +347,7 @@ If you want these variable as part of the command line:
     $ VX_ZONE_LIST=0,3,16 vx_test <options>
 
 Note: VX_ZONE_MASK will override VX_ZONE_LIST. So if you have both set, only
-VX_ZONE_MASK is being seen by the implementation. 
+VX_ZONE_MASK is being seen by the implementation.
 
 Now run your tests again.
 
