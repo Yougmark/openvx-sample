@@ -1,5 +1,5 @@
 
-/* 
+/*
 
  * Copyright (c) 2012-2017 The Khronos Group Inc.
  *

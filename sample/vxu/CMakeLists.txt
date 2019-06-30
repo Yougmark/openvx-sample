@@ -24,11 +24,11 @@ include_directories( BEFORE
                      ${CMAKE_SOURCE_DIR}/debug
                      ${VX_HEADER_DIR}
                      )
-					 
+
 if ((WIN32) OR (CYGWIN))
    add_definitions( ${OPENVX_BUILDING_EXPORT_DEF} )
 endif ((WIN32) OR (CYGWIN))
-					 
+
 FIND_SOURCES()
 
 if ((WIN32) OR (CYGWIN))
@@ -44,9 +44,9 @@ endif (CYGWIN)
 
 target_link_libraries( ${TARGET_NAME} openvx openvx-helper )
 
-install ( TARGETS ${TARGET_NAME} 
+install ( TARGETS ${TARGET_NAME}
           RUNTIME DESTINATION bin
           ARCHIVE DESTINATION lib
           LIBRARY DESTINATION bin )
-		  
+
 set_target_properties( ${TARGET_NAME} PROPERTIES FOLDER ${SAMPLE_FOLDER} )

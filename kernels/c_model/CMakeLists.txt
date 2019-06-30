@@ -23,7 +23,7 @@ include_directories( BEFORE
                      ${VX_HEADER_DIR}
                      ${CMAKE_SOURCE_DIR}/utils
                      ${CMAKE_SOURCE_DIR}/debug )
-					 
+
 FIND_SOURCES()
 
 # add a target named ${TARGET_NAME}
@@ -31,9 +31,9 @@ add_library (${TARGET_NAME} ${SOURCE_FILES})
 
 target_link_libraries( ${TARGET_NAME} openvx )
 
-install ( TARGETS ${TARGET_NAME} 
+install ( TARGETS ${TARGET_NAME}
           RUNTIME DESTINATION bin
           ARCHIVE DESTINATION bin
           LIBRARY DESTINATION bin )
-		  
+
 set_target_properties( ${TARGET_NAME} PROPERTIES FOLDER ${KERNELS_FOLDER} )

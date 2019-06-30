@@ -29,7 +29,7 @@ add_executable (${TARGET_NAME} test.cpp )
 
 target_link_libraries( ${TARGET_NAME} openvx vxu cnn_network )
 
-install ( TARGETS ${TARGET_NAME} 
+install ( TARGETS ${TARGET_NAME}
           RUNTIME DESTINATION bin
           ARCHIVE DESTINATION bin
           LIBRARY DESTINATION bin )

@@ -1,4 +1,4 @@
-/* 
+/*
 
  * Copyright (c) 2012-2017 The Khronos Group Inc.
  *
@@ -78,7 +78,7 @@ vx_status vxThreshold(vx_image src_image, vx_threshold threshold, vx_image dst_i
                 vx_uint8 dst_value = 0;
 
                 if (type == VX_THRESHOLD_TYPE_BINARY)
-                {                    
+                {
                     if (*src_ptr > value.S16)
                     {
                         dst_value = true_value.U8;

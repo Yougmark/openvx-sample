@@ -1,4 +1,4 @@
-/* 
+/*
 
  * Copyright (c) 2017-2017 The Khronos Group Inc.
  *

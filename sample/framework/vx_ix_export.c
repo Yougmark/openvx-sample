@@ -1,4 +1,4 @@
-/* 
+/*
 
  * Copyright (c) 2012-2017 The Khronos Group Inc.
  *
@@ -30,7 +30,7 @@
  * \brief The Export Object as Binary API.
  *  See vx_ix_format.txt for details of the export format
  */
- 
+
 /*
 Export objects to binary (import is in a separate file vx_ix_import.c)
 
@@ -309,9 +309,9 @@ static vx_size putInTable(VXBinExportRefTable *ref_table, const vx_reference new
         {   /* We make sure we are not processing something we have already processed,
             otherwise we could get in a loop because of processing parents that have
             children poitning to their parents...*/
-            
+
             ref_table[index].status = OBJECT_UNSIZED;
-            
+
             /* Now we have to expand compound objects and ROI images */
             if (VX_TYPE_GRAPH == newref->type)
             {
@@ -340,7 +340,7 @@ static vx_size putInTable(VXBinExportRefTable *ref_table, const vx_reference new
                     }
                     actual_numrefs = putInTable(ref_table, (vx_reference)n->kernel, actual_numrefs, kernel_use);
                     for (p = 0; p < n->kernel->signature.num_parameters; ++p)
-                    { 
+                    {
                         /* Add in each parameter. Note that absent optional parameters (NULL) will not end
                         up in the table and have special treatment on output (and input). */
                         actual_numrefs = putInTable(ref_table, n->parameters[p], actual_numrefs, n->kernel->signature.directions[p]);
@@ -674,7 +674,7 @@ static vx_status exportImage(VXBinExport *xport, const vx_size n, int calcSize)
         number of channels, we assume ROI, otherwise we assume
         image from channel. We don't do any other checks... */
         vx_image parent = image->parent;                        /* Note: parent has already been exported as scope in the object header */
-        
+
         if (parent->planes == image->planes)
         {
             /* This is image from ROI, export the parent and rectangle*/
@@ -683,7 +683,7 @@ static vx_status exportImage(VXBinExport *xport, const vx_size n, int calcSize)
             status = exportVxUint8(xport, (vx_uint8)IMAGE_SUB_TYPE_ROI, calcSize);        /* Export as ROI */
             status |= exportVxUint32(xport, x, calcSize);                                 /* Export the dimensions */
             status |= exportVxUint32(xport, y, calcSize);                                 /* To use to make a vx_rectangle_t */
-            status |= exportVxUint32(xport, image->width + x, calcSize); 
+            status |= exportVxUint32(xport, image->width + x, calcSize);
             status |= exportVxUint32(xport, image->height + y, calcSize);
         }
         else
@@ -1155,8 +1155,8 @@ static vx_status exportGraph(VXBinExport *xport,vx_size i, int calcSize)
             for (p = 0; p < num_parameters; ++p)
             {
                 status |= exportVxUint8(xport, node->replicated_flags[p] ? 1 : 0, calcSize);
-            }           
-        }                        
+            }
+        }
         /* Affinity */
         status |= exportVxUint32(xport, node->affinity, calcSize);
         /* Attributes */
@@ -1188,7 +1188,7 @@ static vx_status exportDelay(VXBinExport *xport, vx_size i, int calcSize)
     status = exportObjectHeader(xport, i, calcSize);            /* Export common information */
     status |= exportVxUint32(xport, delay->count, calcSize);    /* Number of delay slots */
     for (c = 0; c < delay->count && VX_SUCCESS == status; ++c)
-    {   
+    {
         /* export each slot reference */
         status = exportVxUint32(xport, indexOf(xport, delay->refs[c]), calcSize);
     }
@@ -1203,7 +1203,7 @@ static vx_status exportObjectArray(VXBinExport *xport, vx_size i, int calcSize)
     status = exportObjectHeader(xport, i, calcSize);
     status |= exportVxUint32(xport, object_array->num_items, calcSize);
     /* Look for the specical case of an object array of images whose parent is a tensor */
-    if (VX_TYPE_IMAGE == object_array->items[0]->type && 
+    if (VX_TYPE_IMAGE == object_array->items[0]->type &&
         ((vx_image)object_array->items[0])->parent &&
         VX_TYPE_TENSOR == ((vx_image)object_array->items[0])->parent->base.type)
     {
@@ -1308,7 +1308,7 @@ VX_API_ENTRY vx_status VX_API_CALL vxExportObjectsToMemory (
     vx_size * length )
 {
     vx_status retval = VX_SUCCESS;      /* To keep track of any errors, and the return value */
-    VXBinExport xport = 
+    VXBinExport xport =
         {
             .context = context,
             .refs = refs,
@@ -1321,7 +1321,7 @@ VX_API_ENTRY vx_status VX_API_CALL vxExportObjectsToMemory (
             .export_length = 0          /* Size of the export */
         };
     vx_size i;                          /* For enumerating the refs and uses */
-    
+
     /* ----------- Do all the checks ----------- */
     /* Check initial parameters */
     if (VX_SUCCESS != vxGetStatus((vx_reference)context) ||
@@ -1366,7 +1366,7 @@ VX_API_ENTRY vx_status VX_API_CALL vxExportObjectsToMemory (
                     }
                 }
             }
-            if (VX_SUCCESS == retval) 
+            if (VX_SUCCESS == retval)
             {
                 switch (refs[i]->type)
                 {
@@ -1506,7 +1506,7 @@ VX_API_ENTRY vx_status VX_API_CALL vxExportObjectsToMemory (
             }
         }
     }
-    
+
     /* ----------- Checks done, if OK, try and export ----------- */
     if (VX_SUCCESS == retval)
     {

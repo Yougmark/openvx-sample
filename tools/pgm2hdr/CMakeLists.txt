@@ -22,15 +22,15 @@ include_directories( BEFORE
                      ${CMAKE_CURRENT_SOURCE_DIR}
                      ${VX_HEADER_DIR}
                      )
-					 
-FIND_SOURCES()					 
-					 
+
+FIND_SOURCES()
+
 # add a target named ${TARGET_NAME}
 add_executable (${TARGET_NAME} ${SOURCE_FILES})
 
-install ( TARGETS ${TARGET_NAME} 
+install ( TARGETS ${TARGET_NAME}
           RUNTIME DESTINATION bin
           ARCHIVE DESTINATION bin
           LIBRARY DESTINATION bin )
-		  
+
 set_target_properties( ${TARGET_NAME} PROPERTIES FOLDER ${TOOLS_FOLDER} )

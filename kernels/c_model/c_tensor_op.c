@@ -89,7 +89,7 @@ void ElementwiseTensorOpImpl(
         //      require it. Implementations are free to additionally limit
         //      their support in the following manner,
         // assert(output.dims[i] == MAX(input0.dims[i], input1.dims[i]));
-        
+
 
     }
 
@@ -98,7 +98,7 @@ void ElementwiseTensorOpImpl(
     {
         const size_t base_type_size = getBaseTypeSize(fmt);
 
-        for (size_t i = 0; i < input0.dim_num; ++i) 
+        for (size_t i = 0; i < input0.dim_num; ++i)
         {
             assert(input0.strides[i] % base_type_size == 0);
             assert(input1.strides[i] % base_type_size == 0);
@@ -147,7 +147,7 @@ void ElementwiseTensorOpImpl(
         if (input1.dims[i] > 1) in1_strides[i] = input1.strides[i];
     }
 
-    
+
 #define OP_TEMPLATE(VX_TYPE_, EXPR_) \
     for (vx_size i5 = 0; i5 < output_dim5; ++i5) \
     for (vx_size i4 = 0; i4 < output_dim4; ++i4) \
@@ -325,7 +325,7 @@ void TensorConvertDepthKernelImpl(
         float offset,
         void * output_ptr, tensor_desc_t output)
 {
-    
+
     assert(input.dim_num > 0 && input.dim_num <= MAX_NUM_OF_DIMENSIONS);
     assert(output.dim_num == input.dim_num);
 
@@ -373,7 +373,7 @@ void TensorConvertDepthKernelImpl(
     for (size_t i2 = 0; i2 < output_dim2; ++i2)
     for (size_t i1 = 0; i1 < output_dim1; ++i1)
     for (size_t i0 = 0; i0 < output_dim0; ++i0)
-    { 
+    {
         const size_t input_byte_offset =
             input.strides[5] * i5 + input.strides[4] * i4 + input.strides[3] * i3 +
             input.strides[2] * i2 + input.strides[1] * i1 + input.strides[0] * i0;

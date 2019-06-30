@@ -1,4 +1,4 @@
-/* 
+/*
 
  * Copyright (c) 2012-2017 The Khronos Group Inc.
  *
@@ -935,7 +935,7 @@ static vx_status vxExportToXMLScalar(FILE* fp, vx_reference refs[], vx_uint32 r,
         indent[i] = '\t';
     indent[i] = '\0';
 
-    fprintf(fp, "%s<scalar reference=\"%u\" elemType=\"%s\"%s", 
+    fprintf(fp, "%s<scalar reference=\"%u\" elemType=\"%s\"%s",
             indent, r, type_pairs[ownStringFromType(scalar->data_type)].name, refNameStr);
 
     if (refs[r]->is_virtual == vx_true_e) /* is not virtual in 1.0, but check anyway */

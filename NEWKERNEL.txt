@@ -1,11 +1,11 @@
 How to Add a New Kernel To the Sample Implementation:
 ======================================+++++++========
 
-1.) Add kernel \defgroup in vx_nodes.h. Describe kernel in detail. 
+1.) Add kernel \defgroup in vx_nodes.h. Describe kernel in detail.
 
 \defgroup group_kernel_xxxxxxx Kernel: XXXXXXX
-\brief A brief description of one sentence. 
-\details A much longer description. Math equations are ok, see MathJax.org. 
+\brief A brief description of one sentence.
+\details A much longer description. Math equations are ok, see MathJax.org.
 
 2.) Add vx Node prototype in include/VX/vx_nodes.h
     a.) add all doxygen tags
@@ -16,12 +16,12 @@ How to Add a New Kernel To the Sample Implementation:
     b.) \ingroup group_kernel_xxxxxx
     c.) Add to sample/vxu/vx_utility.def symbol export
 4.) Add kernel enum in include/VX/vx_kernels.h
-    a.) The kernel enums can't be in the \ingroup as the whole enum are in their own group. 
+    a.) The kernel enums can't be in the \ingroup as the whole enum are in their own group.
         Use \see or \ref.
 5.) Add any external types needed (enums, etc) in include/VX/vx_types.h
     a.) These can also be in \ingroup group_kernel_xxxxxx
-6.) Create file in sample/targets/c_model/ 
-    a.) vx_<verb>.c or vx_<object><verb>.c or vx_<verb><object>.c 
+6.) Create file in sample/targets/c_model/
+    a.) vx_<verb>.c or vx_<object><verb>.c or vx_<verb><object>.c
     b.) write kernel
     c.) write input validator
     d.) write output validator

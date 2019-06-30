@@ -33,7 +33,7 @@
 
 #ifndef min
 #define min(a,b) (a<b?a:b)
-#endif 
+#endif
 // nodeless version of the Hog Cells kernel
 vx_status vxHogCells(vx_image img, vx_scalar cell_width, vx_scalar cell_height, vx_scalar num_bins, vx_tensor magnitudes, vx_tensor bins)
 {

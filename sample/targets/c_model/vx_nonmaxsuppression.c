@@ -152,7 +152,7 @@ static vx_status VX_CALLBACK vxNonMaxSuppressionOutputValidator(vx_node node, vx
                 vxQueryImage(img, VX_IMAGE_WIDTH, &width, sizeof(width));
                 vxQueryImage(img, VX_IMAGE_HEIGHT, &height, sizeof(height));
                 vxQueryImage(img, VX_IMAGE_FORMAT, &format, sizeof(format));
-                
+
                 /* fill in the meta data with the attributes so that the checker will pass */
                 ptr->type = VX_TYPE_IMAGE;
                 ptr->dim.image.format = format;

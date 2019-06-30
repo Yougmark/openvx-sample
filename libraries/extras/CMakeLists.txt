@@ -27,7 +27,7 @@ include_directories( BEFORE
 if ((WIN32) OR (CYGWIN))
    add_definitions( ${OPENVX_BUILDING_EXPORT_DEF} )
 endif ((WIN32) OR (CYGWIN))
-					 
+
 # add a target named ${TARGET_NAME}
 add_library (${TARGET_NAME_1} vx_extras_lib.c)
 
@@ -51,6 +51,6 @@ install ( TARGETS ${TARGET_NAME_1} ${TARGET_NAME_2}
           RUNTIME DESTINATION bin
           ARCHIVE DESTINATION bin
           LIBRARY DESTINATION bin )
-		  
+
 set_target_properties( ${TARGET_NAME_1} PROPERTIES FOLDER ${LIBRARIES_EXTRAS_FOLDER} )
 set_target_properties( ${TARGET_NAME_2} PROPERTIES FOLDER ${LIBRARIES_EXTRAS_FOLDER} )

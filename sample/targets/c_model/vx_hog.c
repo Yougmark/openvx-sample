@@ -218,8 +218,8 @@ static vx_status VX_CALLBACK vxHogFeaturesInputValidator(vx_node node, vx_uint32
                 vxQueryTensor(mag, VX_TENSOR_DATA_TYPE, &format, sizeof(format));
                 if (format == VX_TYPE_INT16)
                 {
-                    
-                    status = VX_SUCCESS; 
+
+                    status = VX_SUCCESS;
                 }
                 else
                 {

@@ -75,7 +75,7 @@ endmacro( FILTER_SOURCES )
 function ( FIND_SOURCES )
     file( GLOB HEADER_FILES_TMP RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.h *.hpp )
     file( GLOB SOURCE_FILES_TMP RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} *.c *.cpp *.cc )
-	
+
 	if (${ARGC} EQUAL 0 )
         set( FILER_OUT_REGEXP "not used regexp" )
     else()

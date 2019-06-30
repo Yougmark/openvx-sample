@@ -1,4 +1,4 @@
-/* 
+/*
 
  * Copyright (c) 2012-2017 The Khronos Group Inc.
  *
@@ -501,7 +501,7 @@ static vx_status VX_CALLBACK vxHalfscaleGaussianInitializer(vx_node node, const 
                     {
                         status |= vxReleaseNode(&nodes[i]);
                     }
-                    
+
                     if (convolution)
                         status |= vxReleaseConvolution(&convolution);
 

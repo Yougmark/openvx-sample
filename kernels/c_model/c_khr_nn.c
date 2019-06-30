@@ -269,7 +269,7 @@ void ConvolutionKernelImpl(
 
             sum = loadValueAsRawInt(fmt, (char *)bias_ptr + bias_byte_offset);
         }
-        
+
         const size_t xx = x * stride_x;
         const size_t yy = y * stride_y;
 
@@ -526,7 +526,7 @@ void SoftmaxKernelImpl(
 {
 //TODO: @Tomer, should we allow extra batch dims beyond 4? conv and poll have upto 3 of them! if not we can just discard this define and its usage
 #define SOFTMAX_ALLOW_EXTRA_DIMS
-    
+
 #ifdef SOFTMAX_ALLOW_EXTRA_DIMS
     assert(input.dim_num >= 1 && input.dim_num <= 4);
 #else
@@ -562,7 +562,7 @@ void SoftmaxKernelImpl(
 
         key_sz = input.dims[key];
         key_in_stride = input.strides[key];
-        
+
         for (size_t i = 0; i < input.dim_num - 1; ++i)
         {
             size_t idx = i < key ? i : i + 1;
@@ -703,7 +703,7 @@ void SoftmaxKernelImpl(
 
             max_val = MAX(max_val, in_val);
         }
-        
+
         // Note: It may be benificial to cache the exponents
         for (size_t i = 0; i < key_sz; ++i)
         {
@@ -941,7 +941,7 @@ void DeconvolutionKernelImpl(
 
             sum = loadValueAsRawInt(fmt, (char *)bias_ptr + bias_byte_offset);
         }
-        
+
         for (size_t ifm = 0; ifm < input_c; ++ifm)
         {
             for (size_t w_y = 0; w_y < weight_h; ++w_y)
