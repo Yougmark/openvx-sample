@@ -109,7 +109,7 @@ static int get_vx_zone_index(const char *name)
     vx_uint32 i;
     for (i = 0; i < dimof(enumnames)-1; i++)
     {
-        if (strcmp(enumnames[i].name, name) == 0)
+        if (enumnames[i].value == atoi(name))
         {
             break;
         }
@@ -142,15 +142,15 @@ void vx_set_debug_zone_from_env(void)
 
                 if (name)
                 {
-                        int zone_id = get_vx_zone_index(name);
-                        if (zone_id < 0)
-                        {
-                            VX_PRINT(VX_ZONE_ERROR, "Invalid log zone name %s", name);
-                        }
-                        else
-                        {
-                            vx_set_debug_zone(zone_id);
-                        }
+					int zone_id = get_vx_zone_index(name);
+					if (zone_id < 0)
+					{
+						VX_PRINT(VX_ZONE_ERROR, "Invalid log zone name %s", name);
+					}
+					else
+					{
+						vx_set_debug_zone(zone_id);
+					}
                 }
             } while (name != NULL);
             free(buf);
