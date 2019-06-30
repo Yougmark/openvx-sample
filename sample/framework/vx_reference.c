@@ -313,7 +313,7 @@ vx_bool ownIsValidSpecificReference(vx_reference ref, vx_enum type)
     vx_bool ret = vx_false_e;
     if (ref != NULL)
     {
-        //ownPrintReference(ref);
+        ownPrintReference(ref);
         if ((ref->magic == VX_MAGIC) &&
             (ref->type == type) &&
             (ownIsValidContext(ref->context) == vx_true_e))

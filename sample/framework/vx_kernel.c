@@ -311,7 +311,7 @@ VX_API_ENTRY vx_status VX_API_CALL vxUnloadKernels(vx_context context, const vx_
                 status = unpublish((vx_context)context);
                 if (status != VX_SUCCESS)
                 {
-                    VX_PRINT(VX_ZONE_ERROR, "Failed to unpublish kernels in module\n");
+                    VX_PRINT(VX_ZONE_ERROR, "Failed to unpublish kernels in module (%s)\n", module);
                 }
                 else
                 {
@@ -325,8 +325,6 @@ VX_API_ENTRY vx_status VX_API_CALL vxUnloadKernels(vx_context context, const vx_
         }
         ownSemPost(&context->modules[m].lock);
     }
-
-    VX_PRINT(VX_ZONE_ERROR, "Failed to find module %s in libraries path\n", module);
 
     return status;
 }

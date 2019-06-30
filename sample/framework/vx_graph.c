@@ -896,7 +896,7 @@ static vx_bool setup_output(vx_graph graph, vx_uint32 n, vx_uint32 p, vx_referen
     }
     else
     {
-        VX_PRINT(VX_ZONE_GRAPH, "Virtual Reference detected at kernel %S parameter %u\n",
+        VX_PRINT(VX_ZONE_GRAPH, "Virtual Reference detected at kernel %s parameter %u\n",
                 graph->nodes[n]->kernel->name,
                 p);
         if ((*vref)->scope->type == VX_TYPE_GRAPH &&
@@ -1815,7 +1815,7 @@ VX_API_ENTRY vx_status VX_API_CALL vxVerifyGraph(vx_graph graph)
         VX_PRINT(VX_ZONE_GRAPH,"Parameter Validation Phase! (%d)\n", status);
         VX_PRINT(VX_ZONE_GRAPH,"###########################\n");
 
-        for (n = 0; n <graph->numNodes; n++)
+        for (n = 0; n < graph->numNodes; n++)
         {
             /* check to make sure that a node has all required parameters */
             for (p = 0; p < graph->nodes[n]->kernel->signature.num_parameters; p++)
