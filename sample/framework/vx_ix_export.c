@@ -82,15 +82,15 @@ struct VXBinExportRefTableS {
 
 typedef struct VXBinExportRefTableS VXBinExportRefTable;
 struct VXBinExportS {
-    vx_context context;                 	/* Context supplied by the application */
-    const vx_reference *refs;       	/* Refs list supplied by the application */
-    const vx_enum *uses;            	/* Uses supplied by the application */
-    VXBinExportRefTable *ref_table;   /* Table for all references compiled by export function */
-    vx_size numrefs;                    	/* Number of references given by the application */
-    vx_size actual_numrefs;             	/* Actual number of references to be exported */
-    vx_uint8 *export_buffer;            	/* Buffer allocated for export */
-    vx_uint8 *curptr;                   	/* Pointer into buffer for next free location */
-    vx_size export_length;              	/* Size in bytes of the buffer */
+    vx_context context;                 /* Context supplied by the application */
+    const vx_reference *refs;           /* Refs list supplied by the application */
+    const vx_enum *uses;                /* Uses supplied by the application */
+    VXBinExportRefTable *ref_table;     /* Table for all references compiled by export function */
+    vx_size numrefs;                    /* Number of references given by the application */
+    vx_size actual_numrefs;             /* Actual number of references to be exported */
+    vx_uint8 *export_buffer;            /* Buffer allocated for export */
+    vx_uint8 *curptr;                   /* Pointer into buffer for next free location */
+    vx_size export_length;              /* Size in bytes of the buffer */
 };
 typedef struct VXBinExportS VXBinExport;
 
