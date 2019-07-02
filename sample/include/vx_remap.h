@@ -36,4 +36,3 @@
 void ownDestructRemap(vx_reference ref);
 
 #endif
-

@@ -40,12 +40,11 @@
  * \param [in] numParams The number of parameters in the list.
  * \ingroup group_int_kernel
  */
-vx_kernel_t *ownAllocateKernel(vx_context context,
-                              vx_enum kenum,
-                              vx_kernel_f function,
-                              vx_char name[VX_MAX_KERNEL_NAME],
-                              vx_param_description_t *parameters,
-                              vx_uint32 numParams);
+vx_kernel_t *ownAllocateKernel(vx_context context, vx_enum kenum,
+                               vx_kernel_f function,
+                               vx_char name[VX_MAX_KERNEL_NAME],
+                               vx_param_description_t *parameters,
+                               vx_uint32 numParams);
 
 /*! \brief Used to initialize a kernel object in a target kernel list.
  * \param [in] context The pointer to the context object.
@@ -62,18 +61,13 @@ vx_kernel_t *ownAllocateKernel(vx_context context,
  * \param [in] deinitialize The function to call to deinitialize the kernel.
  * \ingroup group_int_kernel
  */
-vx_status ownInitializeKernel(vx_context context,
-                             vx_kernel kernel,
-                             vx_enum kenum,
-                             vx_kernel_f function,
-                             vx_char name[VX_MAX_KERNEL_NAME],
-                             vx_param_description_t *parameters,
-                             vx_uint32 numParams,
-                             vx_kernel_validate_f validator,
-                             vx_kernel_input_validate_f in_validator,
-                             vx_kernel_output_validate_f out_validator,
-                             vx_kernel_initialize_f initialize,
-                             vx_kernel_deinitialize_f deinitialize);
+vx_status ownInitializeKernel(
+    vx_context context, vx_kernel kernel, vx_enum kenum, vx_kernel_f function,
+    vx_char name[VX_MAX_KERNEL_NAME], vx_param_description_t *parameters,
+    vx_uint32 numParams, vx_kernel_validate_f validator,
+    vx_kernel_input_validate_f in_validator,
+    vx_kernel_output_validate_f out_validator,
+    vx_kernel_initialize_f initialize, vx_kernel_deinitialize_f deinitialize);
 
 /*! \brief Used to deinitialize a kernel object in a target kernel list.
  * \param [in] kernel The pointer to the kernel structure.

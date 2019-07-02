@@ -30,38 +30,32 @@
  * \ingroup group_tiling
  */
 //!  [gaussian_tiling_function]
-void gaussian_image_tiling_fast(void * VX_RESTRICT parameters[VX_RESTRICT],
-                                void * VX_RESTRICT tile_memory,
-                                vx_size tile_memory_size)
-{
-    vx_uint32 x, y;
-    vx_tile_t *in = (vx_tile_t *)parameters[0];
-    vx_tile_t *out = (vx_tile_t *)parameters[1];
+void gaussian_image_tiling_fast(void *VX_RESTRICT parameters[VX_RESTRICT],
+                                void *VX_RESTRICT tile_memory,
+                                vx_size tile_memory_size) {
+  vx_uint32 x, y;
+  vx_tile_t *in = (vx_tile_t *)parameters[0];
+  vx_tile_t *out = (vx_tile_t *)parameters[1];
 
-    for (y = 0; y < vxTileHeight(out, 0); y += vxTileBlockHeight(out))
-    {
-        for (x = 0; x < vxTileWidth(out, 0); x += vxTileBlockWidth(out))
-        {
-            vx_uint32 sum = 0;
-            /* this math covers a {-1,1},{-1,1} neighborhood and a block of 1x1.
-             * an internal set of for loops could have been placed here instead.
-             */
-            sum += vxImagePixel(vx_uint8, in, 0, x, y, -1, -1);
-            sum += vxImagePixel(vx_uint8, in, 0, x, y,  0, -1) << 1;
-            sum += vxImagePixel(vx_uint8, in, 0, x, y, +1, -1);
-            sum += vxImagePixel(vx_uint8, in, 0, x, y, -1,  0) << 1;
-            sum += vxImagePixel(vx_uint8, in, 0, x, y,  0,  0) << 2;
-            sum += vxImagePixel(vx_uint8, in, 0, x, y, +1,  0) << 1;
-            sum += vxImagePixel(vx_uint8, in, 0, x, y, -1, +1);
-            sum += vxImagePixel(vx_uint8, in, 0, x, y,  0, +1) << 1;
-            sum += vxImagePixel(vx_uint8, in, 0, x, y, +1, +1);
-            sum >>= 4;
-            if (sum > 255)
-                sum = 255;
-            vxImagePixel(vx_uint8, out, 0, x, y, 0, 0) = (vx_uint8)sum;
-        }
+  for (y = 0; y < vxTileHeight(out, 0); y += vxTileBlockHeight(out)) {
+    for (x = 0; x < vxTileWidth(out, 0); x += vxTileBlockWidth(out)) {
+      vx_uint32 sum = 0;
+      /* this math covers a {-1,1},{-1,1} neighborhood and a block of 1x1.
+       * an internal set of for loops could have been placed here instead.
+       */
+      sum += vxImagePixel(vx_uint8, in, 0, x, y, -1, -1);
+      sum += vxImagePixel(vx_uint8, in, 0, x, y, 0, -1) << 1;
+      sum += vxImagePixel(vx_uint8, in, 0, x, y, +1, -1);
+      sum += vxImagePixel(vx_uint8, in, 0, x, y, -1, 0) << 1;
+      sum += vxImagePixel(vx_uint8, in, 0, x, y, 0, 0) << 2;
+      sum += vxImagePixel(vx_uint8, in, 0, x, y, +1, 0) << 1;
+      sum += vxImagePixel(vx_uint8, in, 0, x, y, -1, +1);
+      sum += vxImagePixel(vx_uint8, in, 0, x, y, 0, +1) << 1;
+      sum += vxImagePixel(vx_uint8, in, 0, x, y, +1, +1);
+      sum >>= 4;
+      if (sum > 255) sum = 255;
+      vxImagePixel(vx_uint8, out, 0, x, y, 0, 0) = (vx_uint8)sum;
     }
+  }
 }
 //! [gaussian_tiling_function]
-
-

@@ -25,12 +25,12 @@
  *
  */
 
+#include <VX/vx.h>
+#include <VX/vx_helper.h>
+#include <VX/vx_lib_debug.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <VX/vx.h>
-#include <VX/vx_lib_debug.h>
-#include <VX/vx_helper.h>
 
 int example_pipeline(int argc, char *argv[]);
 int example_corners(int argc, char *argv[]);

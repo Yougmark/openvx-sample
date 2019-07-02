@@ -22,6 +22,7 @@
 
 void ownDestructObjectArray(vx_reference reference);
 
-vx_bool ownValidateObjectArray(vx_object_array array, vx_enum item_type, vx_size num_items);
+vx_bool ownValidateObjectArray(vx_object_array array, vx_enum item_type,
+                               vx_size num_items);
 
 #endif

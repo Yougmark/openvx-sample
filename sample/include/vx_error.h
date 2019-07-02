@@ -55,4 +55,3 @@ vx_error_t *ownAllocateError(vx_context_t *context, vx_status status);
 vx_error_t *ownGetErrorObject(vx_context_t *context, vx_status status);
 
 #endif
-

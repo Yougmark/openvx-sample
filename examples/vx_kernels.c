@@ -18,22 +18,22 @@
 #include <VX/vx.h>
 #include <VX/vx_helper.h>
 
-vx_node vx_create_specific_sobel(vx_context context, vx_graph graph, vx_bool easy)
-{
-    vx_node n = 0;
-    if (easy == vx_false_e) {
-        //! [firstmethod]
-        vx_kernel kernel = vxGetKernelByEnum(context, VX_KERNEL_SOBEL_3x3);
-        vx_node node = vxCreateGenericNode(graph, kernel);
-        //! [firstmethod]
-        n = node;
-    } else {
-        //! [secondmethod]
-        vx_kernel kernel = vxGetKernelByName(context, "org.khronos.openvx.sobel_3x3");
-        vx_node node = vxCreateGenericNode(graph, kernel);
-        //! [secondmethod]
-        n = node;
-    }
-    return n;
+vx_node vx_create_specific_sobel(vx_context context, vx_graph graph,
+                                 vx_bool easy) {
+  vx_node n = 0;
+  if (easy == vx_false_e) {
+    //! [firstmethod]
+    vx_kernel kernel = vxGetKernelByEnum(context, VX_KERNEL_SOBEL_3x3);
+    vx_node node = vxCreateGenericNode(graph, kernel);
+    //! [firstmethod]
+    n = node;
+  } else {
+    //! [secondmethod]
+    vx_kernel kernel =
+        vxGetKernelByName(context, "org.khronos.openvx.sobel_3x3");
+    vx_node node = vxCreateGenericNode(graph, kernel);
+    //! [secondmethod]
+    n = node;
+  }
+  return n;
 }
-

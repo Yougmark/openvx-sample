@@ -37,7 +37,8 @@
  * \param [in] scope The scope under which the object is allocated.
  * \ingroup group_int_reference
  */
-void ownInitReference(vx_reference ref, vx_context context, vx_enum type, vx_reference scope);
+void ownInitReference(vx_reference ref, vx_context context, vx_enum type,
+                      vx_reference scope);
 
 /*! \brief Used to initialize any vx_reference as a delay element
  * \param [in] ref The pointer to the reference object.
@@ -60,7 +61,8 @@ vx_bool ownAddReference(vx_context context, vx_reference ref);
  * \param [in] type The \ref vx_type_e type desired.
  * \ingroup group_int_reference
  */
-vx_reference ownCreateReference(vx_context context, vx_enum type, vx_enum reftype, vx_reference scope);
+vx_reference ownCreateReference(vx_context context, vx_enum type,
+                                vx_enum reftype, vx_reference scope);
 
 /*! \brief Used to destroy an object in a generic way.
  * \ingroup group_int_reference
@@ -71,21 +73,21 @@ typedef void (*vx_destructor_f)(vx_reference ref);
  * \ingroup group_int_reference
  */
 typedef struct vx_destructor_t {
-    vx_enum type;
-    vx_destructor_f destructor;
+  vx_enum type;
+  vx_destructor_f destructor;
 } vx_destructor_t;
 
 /*! \brief Used to destroy a reference.
  * \param [in] ref The reference to release.
  * \param [in] type The \ref vx_type_e to check against.
- * \param [in] internal If true, the internal count is decremented, else the external
- * \param [in] special_destructor The a special function to call after the total count has reached zero, if NULL, a default destructor is used.
+ * \param [in] internal If true, the internal count is decremented, else the
+ * external \param [in] special_destructor The a special function to call after
+ * the total count has reached zero, if NULL, a default destructor is used.
  * \ingroup group_int_reference
  */
-vx_status ownReleaseReferenceInt(vx_reference *ref,
-                        vx_enum type,
-                        vx_enum reftype,
-                        vx_destructor_f special_destructor);
+vx_status ownReleaseReferenceInt(vx_reference *ref, vx_enum type,
+                                 vx_enum reftype,
+                                 vx_destructor_f special_destructor);
 
 /*! \brief Used to validate everything but vx_context, vx_image and vx_buffer.
  * \param [in] ref The reference to validate.
@@ -131,22 +133,20 @@ vx_uint32 ownDecrementReference(vx_reference ref, vx_enum reftype);
  */
 vx_uint32 ownTotalReferenceCount(vx_reference ref);
 
-/*! \brief A tracking function used to increment the write usage counter and track
- * its side-effects.
- * \param [in] ref The reference to print.
- * \ingroup group_int_reference
+/*! \brief A tracking function used to increment the write usage counter and
+ * track its side-effects. \param [in] ref The reference to print. \ingroup
+ * group_int_reference
  */
 void ownWroteToReference(vx_reference ref);
 
-/*! \brief A tracking function used to increment the read usage counter and track
- * its side-effects.
- * \param [in] ref The reference to print.
- * \ingroup group_int_reference
+/*! \brief A tracking function used to increment the read usage counter and
+ * track its side-effects. \param [in] ref The reference to print. \ingroup
+ * group_int_reference
  */
 void ownReadFromReference(vx_reference ref);
 
-/*! \brief Returns the number of bytes in the internal structure for a given type.
- * \ingroup group_int_reference
+/*! \brief Returns the number of bytes in the internal structure for a given
+ * type. \ingroup group_int_reference
  */
 vx_size ownSizeOfType(vx_enum type);
 

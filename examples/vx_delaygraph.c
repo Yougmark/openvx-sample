@@ -17,24 +17,22 @@
 
 #include <VX/vx.h>
 
-void example_delaygraph(vx_context context)
-{
-    vx_status status = VX_SUCCESS;
-    vx_image yuv = vxCreateImage(context, 320, 240, VX_DF_IMAGE_UYVY);
-    vx_delay delay = vxCreateDelay(context, (vx_reference)yuv, 4);
-    vx_image rgb = vxCreateImage(context, 320, 240, VX_DF_IMAGE_RGB);
-    vx_graph graph = vxCreateGraph(context);
+void example_delaygraph(vx_context context) {
+  vx_status status = VX_SUCCESS;
+  vx_image yuv = vxCreateImage(context, 320, 240, VX_DF_IMAGE_UYVY);
+  vx_delay delay = vxCreateDelay(context, (vx_reference)yuv, 4);
+  vx_image rgb = vxCreateImage(context, 320, 240, VX_DF_IMAGE_RGB);
+  vx_graph graph = vxCreateGraph(context);
 
-    vxColorConvertNode(graph, (vx_image)vxGetReferenceFromDelay(delay, 0),rgb);
+  vxColorConvertNode(graph, (vx_image)vxGetReferenceFromDelay(delay, 0), rgb);
 
-    status = vxVerifyGraph(graph);
-    if (status == VX_SUCCESS)
-    {
-        do {
-             /* capture or read image into vxGetImageFromDelay(delay, 0); */
-             status = vxProcessGraph(graph);
-             /* 0 becomes -1, -1 becomes -2, etc. convert is updated with new 0 */
-             vxAgeDelay(delay);
-         } while (1);
-    }
+  status = vxVerifyGraph(graph);
+  if (status == VX_SUCCESS) {
+    do {
+      /* capture or read image into vxGetImageFromDelay(delay, 0); */
+      status = vxProcessGraph(graph);
+      /* 0 becomes -1, -1 becomes -2, etc. convert is updated with new 0 */
+      vxAgeDelay(delay);
+    } while (1);
+  }
 }

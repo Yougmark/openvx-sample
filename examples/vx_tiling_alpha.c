@@ -32,26 +32,22 @@
  * \ingroup group_tiling
  */
 //! [alpha_tiling_function]
-void alpha_image_tiling(void * VX_RESTRICT parameters[VX_RESTRICT],
-                        void * VX_RESTRICT tile_memory,
-                        vx_size tile_memory_size)
-{
-    vx_uint32 i,j;
-    vx_tile_t *in = (vx_tile_t *)parameters[0];
-    vx_float32 *alpha = (vx_float32 *)parameters[1];
-    vx_tile_t *out = (vx_tile_t *)parameters[2];
+void alpha_image_tiling(void *VX_RESTRICT parameters[VX_RESTRICT],
+                        void *VX_RESTRICT tile_memory,
+                        vx_size tile_memory_size) {
+  vx_uint32 i, j;
+  vx_tile_t *in = (vx_tile_t *)parameters[0];
+  vx_float32 *alpha = (vx_float32 *)parameters[1];
+  vx_tile_t *out = (vx_tile_t *)parameters[2];
 
-    for (j = 0u; j < vxTileHeight(in, 0); j+=vxTileBlockHeight(in))
-    {
-        for (i = 0u; i < vxTileWidth(in, 0); i+=vxTileBlockWidth(in))
-        {
-            vx_uint8 pixel = vxImagePixel(vx_uint8, in, 0, i, j, 0, 0);
-            vx_uint8 coeff = (vx_uint8)(255.0f * (*alpha));
-            vx_uint16 value = (coeff * pixel) >> 8;
-            if (value > 255)
-                value = 255;
-            vxImagePixel(vx_uint8, out, 0, i, j, 0, 0) = (vx_uint8)value;
-        }
+  for (j = 0u; j < vxTileHeight(in, 0); j += vxTileBlockHeight(in)) {
+    for (i = 0u; i < vxTileWidth(in, 0); i += vxTileBlockWidth(in)) {
+      vx_uint8 pixel = vxImagePixel(vx_uint8, in, 0, i, j, 0, 0);
+      vx_uint8 coeff = (vx_uint8)(255.0f * (*alpha));
+      vx_uint16 value = (coeff * pixel) >> 8;
+      if (value > 255) value = 255;
+      vxImagePixel(vx_uint8, out, 0, i, j, 0, 0) = (vx_uint8)value;
     }
+  }
 }
 //! [alpha_tiling_function]

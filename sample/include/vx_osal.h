@@ -164,7 +164,7 @@ void ownDeinitQueue(vx_queue_t *q);
 /*! \brief
  * \ingroup group_int_osal
  */
-vx_module_handle_t ownLoadModule(vx_char * name);
+vx_module_handle_t ownLoadModule(vx_char *name);
 
 /*! \brief
  * \ingroup group_int_osal
@@ -174,7 +174,7 @@ void ownUnloadModule(vx_module_handle_t mod);
 /*! \brief
  * \ingroup group_int_osal
  */
-vx_symbol_t ownGetSymbol(vx_module_handle_t mod, vx_char * name);
+vx_symbol_t ownGetSymbol(vx_module_handle_t mod, vx_char *name);
 
 /*! \brief Converts a vx_uint64 to a float in milliseconds.
  * \ingroup group_int_osal
@@ -184,12 +184,12 @@ vx_float32 ownTimeToMS(vx_uint64 c);
 void ownDestroyThreadpool(vx_threadpool_t **ppool);
 
 vx_threadpool_t *ownCreateThreadpool(vx_uint32 numThreads,
-                                    vx_uint32 numWorkItems,
-                                    vx_size sizeWorkItem,
-                                    vx_threadpool_f worker,
-                                    void *arg);
+                                     vx_uint32 numWorkItems,
+                                     vx_size sizeWorkItem,
+                                     vx_threadpool_f worker, void *arg);
 
-vx_bool ownIssueThreadpool(vx_threadpool_t *pool, vx_value_set_t workitems[], uint32_t numWorkItems);
+vx_bool ownIssueThreadpool(vx_threadpool_t *pool, vx_value_set_t workitems[],
+                           uint32_t numWorkItems);
 
 vx_bool ownCompleteThreadpool(vx_threadpool_t *pool, vx_bool blocking);
 

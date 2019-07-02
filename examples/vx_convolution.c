@@ -17,20 +17,21 @@
 
 #include <VX/vx.h>
 
-vx_status example_conv(vx_context context)
-{
-    //! [assign]
-    // A horizontal Scharr gradient operator with different scale.
-    vx_int16 gx[3][3] = {
-        {  3, 0, -3},
-        { 10, 0,-10},
-        {  3, 0, -3},
-    };
-    vx_uint32 scale = 8;
-    vx_convolution scharr_x = vxCreateConvolution(context, 3, 3);
-    vxCopyConvolutionCoefficients(scharr_x, (vx_int16*)gx, VX_WRITE_ONLY, VX_MEMORY_TYPE_HOST);
-    vxSetConvolutionAttribute(scharr_x, VX_CONVOLUTION_SCALE, &scale, sizeof(scale));
-    //! [assign]
-    vxReleaseConvolution(&scharr_x);
-    return VX_SUCCESS;
+vx_status example_conv(vx_context context) {
+  //! [assign]
+  // A horizontal Scharr gradient operator with different scale.
+  vx_int16 gx[3][3] = {
+      {3, 0, -3},
+      {10, 0, -10},
+      {3, 0, -3},
+  };
+  vx_uint32 scale = 8;
+  vx_convolution scharr_x = vxCreateConvolution(context, 3, 3);
+  vxCopyConvolutionCoefficients(scharr_x, (vx_int16*)gx, VX_WRITE_ONLY,
+                                VX_MEMORY_TYPE_HOST);
+  vxSetConvolutionAttribute(scharr_x, VX_CONVOLUTION_SCALE, &scale,
+                            sizeof(scale));
+  //! [assign]
+  vxReleaseConvolution(&scharr_x);
+  return VX_SUCCESS;
 }

@@ -21,9 +21,9 @@
  * \author Erik Rainey <erik.rainey@gmail.com>
  */
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
 #include <vx_graph_factory.h>
 
 /*! \brief The array of factory functions.
@@ -38,86 +38,70 @@ vx_graph_factory_t factories[] = {
 /*! \brief Returns a graph from one of the matching factories.
  * \ingroup group_example
  */
-vx_graph vxGraphFactory(vx_context context, vx_enum factory_name)
-{
-    vx_uint32 f = 0;
-    for (f = 0; f < dimof(factories); f++)
-    {
-        if (factory_name == factories[f].factory_name)
-        {
-            return factories[f].factory(context);
-        }
+vx_graph vxGraphFactory(vx_context context, vx_enum factory_name) {
+  vx_uint32 f = 0;
+  for (f = 0; f < dimof(factories); f++) {
+    if (factory_name == factories[f].factory_name) {
+      return factories[f].factory(context);
     }
-    return 0;
+  }
+  return 0;
 }
 
 /*! \brief The graph factory example.
  * \ingroup group_example
  */
-int main(int argc, char *argv[])
-{
-    (void)argc;
-    (void)argv;
+int main(int argc, char *argv[]) {
+  (void)argc;
+  (void)argv;
 
-    vx_status status = VX_SUCCESS;
-    vx_context context = vxCreateContext();
-    if (vxGetStatus((vx_reference)context) == VX_SUCCESS)
-    {
-        vx_image images[] = {
-                vxCreateImage(context, 640, 480, VX_DF_IMAGE_U8),
-                vxCreateImage(context, 640, 480, VX_DF_IMAGE_S16),
-        };
-        vx_graph graph = vxGraphFactory(context, VX_GRAPH_FACTORY_EDGE);
-        if (vxGetStatus((vx_reference)graph) == VX_SUCCESS)
-        {
-            vx_uint32 p, num = 0;
-            status |= vxQueryGraph(graph, VX_GRAPH_NUMPARAMETERS, &num, sizeof(num));
-            if (status == VX_SUCCESS)
-            {
-                printf("There are %u parameters to this graph!\n", num);
-                for (p = 0; p < num; p++)
-                {
-                    vx_parameter param = vxGetGraphParameterByIndex(graph, p);
-                    if (param)
-                    {
-                        vx_enum dir = 0;
-                        vx_enum type = 0;
-                        status |= vxQueryParameter(param, VX_PARAMETER_DIRECTION, &dir, sizeof(dir));
-                        status |= vxQueryParameter(param, VX_PARAMETER_TYPE, &type, sizeof(type));
-                        printf("graph.parameter[%u] dir:%d type:%08x\n", p, dir, type);
-                        vxReleaseParameter(&param);
-                    }
-                    else
-                    {
-                        printf("Invalid parameter retrieved from graph!\n");
-                    }
-                }
-
-                status |= vxSetGraphParameterByIndex(graph, 0, (vx_reference)images[0]);
-                status |= vxSetGraphParameterByIndex(graph, 1, (vx_reference)images[1]);
-            }
-
-            status |= vxVerifyGraph(graph);
-            if (status == VX_SUCCESS)
-            {
-                status = vxProcessGraph(graph);
-                if (status == VX_SUCCESS)
-                {
-                    printf("Ran Graph!\n");
-                }
-            }
-            vxReleaseGraph(&graph);
+  vx_status status = VX_SUCCESS;
+  vx_context context = vxCreateContext();
+  if (vxGetStatus((vx_reference)context) == VX_SUCCESS) {
+    vx_image images[] = {
+        vxCreateImage(context, 640, 480, VX_DF_IMAGE_U8),
+        vxCreateImage(context, 640, 480, VX_DF_IMAGE_S16),
+    };
+    vx_graph graph = vxGraphFactory(context, VX_GRAPH_FACTORY_EDGE);
+    if (vxGetStatus((vx_reference)graph) == VX_SUCCESS) {
+      vx_uint32 p, num = 0;
+      status |= vxQueryGraph(graph, VX_GRAPH_NUMPARAMETERS, &num, sizeof(num));
+      if (status == VX_SUCCESS) {
+        printf("There are %u parameters to this graph!\n", num);
+        for (p = 0; p < num; p++) {
+          vx_parameter param = vxGetGraphParameterByIndex(graph, p);
+          if (param) {
+            vx_enum dir = 0;
+            vx_enum type = 0;
+            status |= vxQueryParameter(param, VX_PARAMETER_DIRECTION, &dir,
+                                       sizeof(dir));
+            status |=
+                vxQueryParameter(param, VX_PARAMETER_TYPE, &type, sizeof(type));
+            printf("graph.parameter[%u] dir:%d type:%08x\n", p, dir, type);
+            vxReleaseParameter(&param);
+          } else {
+            printf("Invalid parameter retrieved from graph!\n");
+          }
         }
-        else
-        {
-            printf("Failed to create graph!\n");
+
+        status |= vxSetGraphParameterByIndex(graph, 0, (vx_reference)images[0]);
+        status |= vxSetGraphParameterByIndex(graph, 1, (vx_reference)images[1]);
+      }
+
+      status |= vxVerifyGraph(graph);
+      if (status == VX_SUCCESS) {
+        status = vxProcessGraph(graph);
+        if (status == VX_SUCCESS) {
+          printf("Ran Graph!\n");
         }
-        vxReleaseContext(&context);
+      }
+      vxReleaseGraph(&graph);
+    } else {
+      printf("Failed to create graph!\n");
     }
-    else
-    {
-        printf("failed to create context!\n");
-    }
-    return status;
+    vxReleaseContext(&context);
+  } else {
+    printf("failed to create context!\n");
+  }
+  return status;
 }
-

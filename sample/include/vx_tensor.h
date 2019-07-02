@@ -29,15 +29,14 @@
  * \brief The internal Tensor API.
  */
 
-
 /*! \brief Used to validate the vx_tensor types.
  * \param [in] tennsor The vx_tensor to validate.
  * \ingroup group_int_tensor
  */
 vx_bool ownIsValidTensor(vx_tensor tensor);
 
-//TODO: missing documentation
-void * ownAllocateTensorMemory(vx_tensor tensor);
+// TODO: missing documentation
+void* ownAllocateTensorMemory(vx_tensor tensor);
 
 /*! \brief Used to initialize the image meta-data structure with the correct
  * values per the df_image code.
@@ -47,7 +46,9 @@ void * ownAllocateTensorMemory(vx_tensor tensor);
  * \param [in] color VX_DF_IMAGE color space.
  * \ingroup group_int_image
  */
-void ownInitTensor(vx_tensor tensor, const vx_size* dimensions, vx_size number_of_dimensions, vx_enum data_type, vx_int8 fixed_point_position);
+void ownInitTensor(vx_tensor tensor, const vx_size* dimensions,
+                   vx_size number_of_dimensions, vx_enum data_type,
+                   vx_int8 fixed_point_position);
 
 /*! \brief Used to free an image object.
  * \param [in] image The image object to free. Only the data is freed, not the

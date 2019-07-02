@@ -36,9 +36,8 @@
  */
 vx_bool ownIsValidImage(vx_image img);
 
-/*! \brief Determines which VX_DF_IMAGE are supported in the sample implementation.
- * \param [in] code The df_image code to test.
- * \retval vx_bool
+/*! \brief Determines which VX_DF_IMAGE are supported in the sample
+ * implementation. \param [in] code The df_image code to test. \retval vx_bool
  * \retval vx_true_e The code is supported.
  * \retval vx_false_e The code is not supported.
  * \ingroup group_int_image
@@ -53,13 +52,8 @@ vx_bool ownIsSupportedFourcc(vx_df_image code);
  * \param [in] height The height in pixels.
  * \ingroup group_int_image
  */
-void ownInitPlane(vx_image image,
-                 vx_uint32 index,
-                 vx_uint32 soc,
-                 vx_uint32 channels,
-                 vx_uint32 width,
-                 vx_uint32 height);
-
+void ownInitPlane(vx_image image, vx_uint32 index, vx_uint32 soc,
+                  vx_uint32 channels, vx_uint32 width, vx_uint32 height);
 
 /*! \brief Used to initialize the image meta-data structure with the correct
  * values per the df_image code.
@@ -69,7 +63,8 @@ void ownInitPlane(vx_image image,
  * \param [in] color VX_DF_IMAGE color space.
  * \ingroup group_int_image
  */
-void ownInitImage(vx_image image, vx_uint32 width, vx_uint32 height, vx_df_image color);
+void ownInitImage(vx_image image, vx_uint32 width, vx_uint32 height,
+                  vx_df_image color);
 
 /*! \brief Used to free an image object.
  * \param [in] image The image object to free. Only the data is freed, not the

@@ -28,40 +28,35 @@
  * \brief An example of an Eye Tracking Graph.
  * \ingroup group_example
  */
-int example_eyetracking(int argc, char *argv[])
-{
-    vx_status status = VX_SUCCESS;
-    vx_uint32 width = 640;
-    vx_uint32 height = 480;
-    vx_bool running = vx_true_e;
-    vx_context context = vxCreateContext();
-    if (vxGetStatus((vx_reference)context) == VX_SUCCESS)
-    {
-        vx_image images[] = {
-            vxCreateImage(context, width, height, VX_DF_IMAGE_UYVY),
-            vxCreateImage(context, width, height, VX_DF_IMAGE_U8),
-        };
+int example_eyetracking(int argc, char *argv[]) {
+  vx_status status = VX_SUCCESS;
+  vx_uint32 width = 640;
+  vx_uint32 height = 480;
+  vx_bool running = vx_true_e;
+  vx_context context = vxCreateContext();
+  if (vxGetStatus((vx_reference)context) == VX_SUCCESS) {
+    vx_image images[] = {
+        vxCreateImage(context, width, height, VX_DF_IMAGE_UYVY),
+        vxCreateImage(context, width, height, VX_DF_IMAGE_U8),
+    };
 
-        vx_graph graph = vxCreateGraph(context);
-        if (vxGetStatus((vx_reference)graph) == VX_SUCCESS)
-        {
-            vx_node nodes[] = {
-                /*! \todo add nodes which process eye tracking */
-            };
+    vx_graph graph = vxCreateGraph(context);
+    if (vxGetStatus((vx_reference)graph) == VX_SUCCESS) {
+      vx_node nodes[] = {
+          /*! \todo add nodes which process eye tracking */
+      };
 
-            status = vxVerifyGraph(context, graph);
-            if (status == VX_SUCCESS)
-            {
-                do {
-                    /*! \todo capture an image */
-                    status = vxProcessGraph(context, graph, NULL);
-                    /*! \todo do something with the data */
-                } while (running == vx_true_e);
-            }
-            vxReleaseGraph(&graph);
-        }
-        vxReleaseContext(&context);
+      status = vxVerifyGraph(context, graph);
+      if (status == VX_SUCCESS) {
+        do {
+          /*! \todo capture an image */
+          status = vxProcessGraph(context, graph, NULL);
+          /*! \todo do something with the data */
+        } while (running == vx_true_e);
+      }
+      vxReleaseGraph(&graph);
     }
-    return status;
+    vxReleaseContext(&context);
+  }
+  return status;
 }
-
