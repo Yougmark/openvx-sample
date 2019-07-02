@@ -24,7 +24,7 @@
 #ifndef _VX_EXTRAS_MODULE_H_
 #define _VX_EXTRAS_MODULE_H_
 
-#ifdef  __cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -38,9 +38,8 @@ extern vx_kernel_description_t norm_kernel;
 extern vx_kernel_description_t scharr3x3_kernel;
 extern vx_kernel_description_t sobelMxN_kernel;
 
-#ifdef  __cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif  /* _VX_EXTRAS_MODULE_H_ */
-
+#endif /* _VX_EXTRAS_MODULE_H_ */
