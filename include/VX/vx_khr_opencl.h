@@ -32,8 +32,8 @@
  *
  * \defgroup group_cl_image Images
  * \brief OpenVX Images
- * \details Depending on whether the OpenCL implementation supports images, <tt>vx_image</tt>
- * may map to an <tt>image2d_t</tt> or a OpenCL buffer.
+ * \details Depending on whether the OpenCL implementation supports images,
+ * <tt>vx_image</tt> may map to an <tt>image2d_t</tt> or a OpenCL buffer.
  *
  * \defgroup group_cl_array Arrays
  * \brief OpenVX Arrays
@@ -68,12 +68,11 @@
  */
 
 #ifndef VX_SCALE_UNITY
-#define VX_SCALE_UNITY  (1024)
+#define VX_SCALE_UNITY (1024)
 #endif
 
-/*!\brief The maximum number of planes an image may have which is compatible across both
- * API.
- * \ingroup group_cl_def
+/*!\brief The maximum number of planes an image may have which is compatible
+ * across both API. \ingroup group_cl_def
  */
 #define VX_CL_MAX_PLANES (4)
 
@@ -97,50 +96,41 @@
 /*! \brief Adds an OpenCL Kernel as source code into the OpenVX implementation.
  * \param [in] context The OpenVX Context.
  * \param [in] name The name of the kernel in OpenVX nomenclature.
- * \param [in] enumeration The OpenVX kernel enumeration used to identify this kernel.
- * \param [in] source The array of source line pointers.
- * \param [in] line_lengths The array of lines lengths for each line of source.
- * \param [in] num_lines the number of lines in both the sources array and line_lengths array.
- * \param [in] symbol_name The name of the kernel to call in the program.
+ * \param [in] enumeration The OpenVX kernel enumeration used to identify this
+ * kernel. \param [in] source The array of source line pointers. \param [in]
+ * line_lengths The array of lines lengths for each line of source. \param [in]
+ * num_lines the number of lines in both the sources array and line_lengths
+ * array. \param [in] symbol_name The name of the kernel to call in the program.
  * \param [in] numParams The number of parameters to the OpenVX kernel.
  * \param [in] input The input validator.
  * \param [in] output The output validator.
- * \see <tt>vxAddParameterToKernel</tt> to configure the specific parameter attributes.
- * \ingroup group_cl_api
+ * \see <tt>vxAddParameterToKernel</tt> to configure the specific parameter
+ * attributes. \ingroup group_cl_api
  */
-VX_API_ENTRY vx_kernel VX_API_CALL vxAddOpenCLAsSourceKernel(vx_context context,
-                                    vx_char name[VX_MAX_KERNEL_NAME],
-                                    vx_enum enumeration,
-                                    char *source[],
-                                    size_t line_lengths[],
-                                    size_t num_lines,
-                                    char symbol_name[],
-                                    vx_uint32 numParams,
-                                    vx_kernel_input_validate_f input,
-                                    vx_kernel_output_validate_f output);
+VX_API_ENTRY vx_kernel VX_API_CALL vxAddOpenCLAsSourceKernel(
+    vx_context context, vx_char name[VX_MAX_KERNEL_NAME], vx_enum enumeration,
+    char *source[], size_t line_lengths[], size_t num_lines, char symbol_name[],
+    vx_uint32 numParams, vx_kernel_input_validate_f input,
+    vx_kernel_output_validate_f output);
 
-/*! \brief Adds an OpenCL Kernel as binary program into the OpenVX implementation.
- * \param [in] context The OpenVX Context.
- * \param [in] name The name of the kernel in OpenVX nomenclature.
- * \param [in] enumeration The OpenVX kernel enumeration used to identify this kernel.
- * \param [in] program The OpenCL Program which contains the kernel (either pre-compiled or compiled by user).
- * \param [in] symbol_name The name of the kernel to call in the program.
+/*! \brief Adds an OpenCL Kernel as binary program into the OpenVX
+ * implementation. \param [in] context The OpenVX Context. \param [in] name The
+ * name of the kernel in OpenVX nomenclature. \param [in] enumeration The OpenVX
+ * kernel enumeration used to identify this kernel. \param [in] program The
+ * OpenCL Program which contains the kernel (either pre-compiled or compiled by
+ * user). \param [in] symbol_name The name of the kernel to call in the program.
  * \param [in] numParams The number of parameters to the OpenVX kernel.
  * \param [in] input The input validator.
  * \param [in] output The output validator.
- * \see <tt>vxAddParameterToKernel</tt> to configure the specific parameter attributes.
- * \ingroup group_cl_api
+ * \see <tt>vxAddParameterToKernel</tt> to configure the specific parameter
+ * attributes. \ingroup group_cl_api
  */
-VX_API_ENTRY vx_kernel VX_API_CALL vxAddOpenCLAsBinaryKernel(vx_context context,
-                                    vx_char name[VX_MAX_KERNEL_NAME],
-                                    vx_enum enumeration,
-                                    cl_program program,
-                                    char symbol_name[],
-                                    vx_uint32 numParams,
-                                    vx_kernel_input_validate_f input,
-                                    vx_kernel_output_validate_f output);
+VX_API_ENTRY vx_kernel VX_API_CALL vxAddOpenCLAsBinaryKernel(
+    vx_context context, vx_char name[VX_MAX_KERNEL_NAME], vx_enum enumeration,
+    cl_program program, char symbol_name[], vx_uint32 numParams,
+    vx_kernel_input_validate_f input, vx_kernel_output_validate_f output);
 
-#endif // External API
+#endif  // External API
 
 #if defined(VX_CL_DOCUMENTATION) || defined(VX_CL_KERNEL)
 
@@ -158,7 +148,7 @@ VX_API_ENTRY vx_kernel VX_API_CALL vxAddOpenCLAsBinaryKernel(vx_context context,
  * \ingroup group_cl_image
  */
 #define vxImagePixel(type, ptr, x, y, sx, sy) \
-    (*(type *)(&((uchar *)ptr)[((y) * sy) + ((x) * sx)]))
+  (*(type *)(&((uchar *)ptr)[((y)*sy) + ((x)*sx)]))
 
 /*!
  * \brief Allows access to an array item as a typecast pointer deference.
@@ -169,27 +159,26 @@ VX_API_ENTRY vx_kernel VX_API_CALL vxAddOpenCLAsBinaryKernel(vx_context context,
  * \ingroup group_cl_array
  */
 #define vxArrayItem(type, ptr, index, stride) \
-    (*(type *)(&((uchar *)ptr)[index*stride]))
+  (*(type *)(&((uchar *)ptr)[index * stride]))
 
-/*! \brief Allows access to a matrix element \f$ M_{ij} \f$ where i is the column and j is the row.
- * \param type The OpenCL single element type of the matrix.
- * \param ptr The <tt>__global</tt> pointer to the base of the array.
+/*! \brief Allows access to a matrix element \f$ M_{ij} \f$ where i is the
+ * column and j is the row. \param type The OpenCL single element type of the
+ * matrix. \param ptr The <tt>__global</tt> pointer to the base of the array.
  * \param columns The number of columns in the matrix.
  * \param i The column index
  * \param j The row index
  * \ingroup group_cl_matrix
  */
-#define vxMatrixElement(type, ptr, columns, i, j) (((type *)ptr)[columns*j + i])
+#define vxMatrixElement(type, ptr, columns, i, j) \
+  (((type *)ptr)[columns * j + i])
 
-/*! \brief Allows access to a convolution element \f$ C_{ij} \f$ where i is the column and j is the row.
- * \note Convolution elements are always of type <tt>short</tt>.
- * \param ptr The <tt>__global</tt> pointer to the base of the array.
- * \param columns The number of columns in the matrix.
- * \param i The column index
- * \param j The row index
- * \ingroup group_cl_convolution
+/*! \brief Allows access to a convolution element \f$ C_{ij} \f$ where i is the
+ * column and j is the row. \note Convolution elements are always of type
+ * <tt>short</tt>. \param ptr The <tt>__global</tt> pointer to the base of the
+ * array. \param columns The number of columns in the matrix. \param i The
+ * column index \param j The row index \ingroup group_cl_convolution
  */
-#define vxConvolveElement(ptr, columns, i, j) (((short *)ptr)[columns*j + i])
+#define vxConvolveElement(ptr, columns, i, j) (((short *)ptr)[columns * j + i])
 
 /*! \brief Allows access to a distribution frequency counter.
  * \param ptr The <tt>__global</tt> pointer to the base of the distribution.
@@ -200,7 +189,9 @@ VX_API_ENTRY vx_kernel VX_API_CALL vxAddOpenCLAsBinaryKernel(vx_context context,
  * \ingroup group_cl_distribution
  */
 #define vxGetFrequency(ptr, value, offset, range, window_size) \
-    ((offset <= value) && (value <= (range+offset)) ? ptr[(value-offset)/window_size] : 0)
+  ((offset <= value) && (value <= (range + offset))            \
+       ? ptr[(value - offset) / window_size]                   \
+       : 0)
 
 /*! \brief Increments a distribution frequency counter for a value.
  * \param ptr The <tt>__global</tt> pointer to the base of the distribution.
@@ -211,7 +202,9 @@ VX_API_ENTRY vx_kernel VX_API_CALL vxAddOpenCLAsBinaryKernel(vx_context context,
  * \ingroup group_cl_distribution
  */
 #define vxIncFrequency(ptr, value, offset, range, window_size) \
-    ((offset <= value) && (value <= (range+offset)) ? ++ptr[(value-offset)/window_size] : 0)
+  ((offset <= value) && (value <= (range + offset))            \
+       ? ++ptr[(value - offset) / window_size]                 \
+       : 0)
 
 /*! \brief Decrements a distribution frequency counter for a value.
  * \param ptr The <tt>__global</tt> pointer to the base of the distribution.
@@ -222,7 +215,9 @@ VX_API_ENTRY vx_kernel VX_API_CALL vxAddOpenCLAsBinaryKernel(vx_context context,
  * \ingroup group_cl_distribution
  */
 #define vxDecFrequency(ptr, value, offset, range, window_size) \
-    ((offset <= value) && (value <= (range+offset)) ? --ptr[(value-offset)/window_size] : 0)
+  ((offset <= value) && (value <= (range + offset))            \
+       ? --ptr[(value - offset) / window_size]                 \
+       : 0)
 
 #if defined(VX_VERSION_1_1) && (VX_VERSION >= VX_VERSION_1_1)
 
@@ -235,7 +230,9 @@ VX_API_ENTRY vx_kernel VX_API_CALL vxAddOpenCLAsBinaryKernel(vx_context context,
  * \ingroup group_cl_distribution
  */
 #define vxGetFrequency2(ptr, value, offset, range, num_bins) \
-    ((offset <= value) && (value <= (range+offset)) ? ptr[(value-offset)*num_bins/range] : 0)
+  ((offset <= value) && (value <= (range + offset))          \
+       ? ptr[(value - offset) * num_bins / range]            \
+       : 0)
 
 /*! \brief Increments a distribution frequency counter for a value.
  * \param ptr The <tt>__global</tt> pointer to the base of the distribution.
@@ -246,7 +243,9 @@ VX_API_ENTRY vx_kernel VX_API_CALL vxAddOpenCLAsBinaryKernel(vx_context context,
  * \ingroup group_cl_distribution
  */
 #define vxIncFrequency2(ptr, value, offset, range, num_bins) \
-    ((offset <= value) && (value <= (range+offset)) ? ++ptr[(value-offset)*num_bins/range] : 0)
+  ((offset <= value) && (value <= (range + offset))          \
+       ? ++ptr[(value - offset) * num_bins / range]          \
+       : 0)
 
 /*! \brief Decrements a distribution frequency counter for a value.
  * \param ptr The <tt>__global</tt> pointer to the base of the distribution.
@@ -257,11 +256,12 @@ VX_API_ENTRY vx_kernel VX_API_CALL vxAddOpenCLAsBinaryKernel(vx_context context,
  * \ingroup group_cl_distribution
  */
 #define vxDecFrequency2(ptr, value, offset, range, num_bins) \
-    ((offset <= value) && (value <= (range+offset)) ? --ptr[(value-offset)*num_bins/range] : 0)
+  ((offset <= value) && (value <= (range + offset))          \
+       ? --ptr[(value - offset) * num_bins / range]          \
+       : 0)
 
 #endif /*VX_VERSION_1_1*/
 
 #endif
 
 #endif
-

@@ -21,14 +21,6 @@
 #include <VX/vx.h>
 #include <VX/vx_helper.h>
 
-#define FGETS(str, fh)                           \
-  {                                              \
-    char* success = fgets(str, sizeof(str), fh); \
-    if (!success) {                              \
-      printf("fgets failed\n");                  \
-    }                                            \
-  }
-
 #ifdef __cplusplus
 extern "C" {
 #endif

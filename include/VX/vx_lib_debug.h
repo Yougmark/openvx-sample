@@ -38,7 +38,7 @@
 /*! \brief The maximum filepath name length.
  * \ingroup group_debug_ext
  */
-#define VX_MAX_FILE_NAME    (256)
+#define VX_MAX_FILE_NAME (256)
 
 /*! \brief The library value for the extension
  * \ingroup group_debug_ext
@@ -50,98 +50,109 @@
  */
 enum vx_kernel_debug_ext_e {
 
-    /*!
-     * \brief The Copy kernel. Output = Input.
-     * \param  [in] vx_image The input image.
-     * \param [out] vx_image The output image.
-     * \see group_vision_function_copy_image
-     */
-    VX_KERNEL_DEBUG_COPY_IMAGE = VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x0,
+  /*!
+   * \brief The Copy kernel. Output = Input.
+   * \param  [in] vx_image The input image.
+   * \param [out] vx_image The output image.
+   * \see group_vision_function_copy_image
+   */
+  VX_KERNEL_DEBUG_COPY_IMAGE =
+      VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x0,
 
-    /*!
-     * \brief The Copy Kernel, Output = Input.
-     * \param [in] vx_array The input array.
-     * \param [out] vx_array The output array.
-     * \see group_vision_function_copy_array
-     */
-     VX_KERNEL_DEBUG_COPY_ARRAY = VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x1,
+  /*!
+   * \brief The Copy Kernel, Output = Input.
+   * \param [in] vx_array The input array.
+   * \param [out] vx_array The output array.
+   * \see group_vision_function_copy_array
+   */
+  VX_KERNEL_DEBUG_COPY_ARRAY =
+      VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x1,
 
-    /*!
-     * \brief The File Writing Kernel for Images.
-     * \param [in] vx_image The input image.
-     * \param [in] vx_array The name of the file.
-     * \see group_vision_function_fwrite_image
-     */
-    VX_KERNEL_DEBUG_FWRITE_IMAGE = VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x2,
+  /*!
+   * \brief The File Writing Kernel for Images.
+   * \param [in] vx_image The input image.
+   * \param [in] vx_array The name of the file.
+   * \see group_vision_function_fwrite_image
+   */
+  VX_KERNEL_DEBUG_FWRITE_IMAGE =
+      VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x2,
 
-    /*!
-     * \brief The File Writing Kernel for Arrays
-     * \param [in] vx_array The input array.
-     * \param [in] vx_array The name of the file.
-     * \see group_vision_function_fwrite_array
-     */
-     VX_KERNEL_DEBUG_FWRITE_ARRAY = VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x3,
+  /*!
+   * \brief The File Writing Kernel for Arrays
+   * \param [in] vx_array The input array.
+   * \param [in] vx_array The name of the file.
+   * \see group_vision_function_fwrite_array
+   */
+  VX_KERNEL_DEBUG_FWRITE_ARRAY =
+      VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x3,
 
-     /*!
-      * \brief The File Reading Kernel for images.
-      * \param [in] vx_array The name of the file to read.
-      * \param [out] vx_image The output image.
-      * \see group_vision_function_fread_image
-      */
-     VX_KERNEL_DEBUG_FREAD_IMAGE = VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x4,
+  /*!
+   * \brief The File Reading Kernel for images.
+   * \param [in] vx_array The name of the file to read.
+   * \param [out] vx_image The output image.
+   * \see group_vision_function_fread_image
+   */
+  VX_KERNEL_DEBUG_FREAD_IMAGE =
+      VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x4,
 
-     /*!
-      * \brief The File Reading Kernel for Arrays.
-      * \param [in] vx_array The name of the file to read.
-      * \param [out] vx_image The output image.
-      * \see group_vision_function_fread_array
-      */
-     VX_KERNEL_DEBUG_FREAD_ARRAY = VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x5,
+  /*!
+   * \brief The File Reading Kernel for Arrays.
+   * \param [in] vx_array The name of the file to read.
+   * \param [out] vx_image The output image.
+   * \see group_vision_function_fread_array
+   */
+  VX_KERNEL_DEBUG_FREAD_ARRAY =
+      VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x5,
 
-     /*!
-      * \brief Fills the image with a given value.
-      * \param [in] vx_uint32
-      * \param [out] vx_image
-      * \ingroup group_vision_function_fill_image
-      */
-     VX_KERNEL_FILL_IMAGE = VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x6,
+  /*!
+   * \brief Fills the image with a given value.
+   * \param [in] vx_uint32
+   * \param [out] vx_image
+   * \ingroup group_vision_function_fill_image
+   */
+  VX_KERNEL_FILL_IMAGE =
+      VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x6,
 
-     /*!
-      * \brief Checks an image against a known value and returns a number of
-      * errors.
-      * \param [in] vx_image
-      * \param [in] vx_uint32
-      * \param [out] vx_scalar
-      * \ingroup group_vision_function_check_image
-      */
-     VX_KERNEL_CHECK_IMAGE = VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x7,
+  /*!
+   * \brief Checks an image against a known value and returns a number of
+   * errors.
+   * \param [in] vx_image
+   * \param [in] vx_uint32
+   * \param [out] vx_scalar
+   * \ingroup group_vision_function_check_image
+   */
+  VX_KERNEL_CHECK_IMAGE =
+      VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x7,
 
-     /*!
-      * \brief Checks an array against a known value and returns a number of
-      * errors.
-      * \param [in] vx_array
-      * \param [in] vx_uint8
-      * \param [out] vx_scalar
-      * \ingroup group_vision_function_check_array
-      */
-     VX_KERNEL_CHECK_ARRAY = VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x8,
+  /*!
+   * \brief Checks an array against a known value and returns a number of
+   * errors.
+   * \param [in] vx_array
+   * \param [in] vx_uint8
+   * \param [out] vx_scalar
+   * \ingroup group_vision_function_check_array
+   */
+  VX_KERNEL_CHECK_ARRAY =
+      VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x8,
 
-     /*!
-      * \brief Compares two images and returns the number of differences.
-      * \param [in] vx_image
-      * \param [in] vx_image
-      * \param [out] vx_scalar
-      * \ingroup group_vision_function_compare_image
-      */
-     VX_KERNEL_COMPARE_IMAGE = VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x9,
+  /*!
+   * \brief Compares two images and returns the number of differences.
+   * \param [in] vx_image
+   * \param [in] vx_image
+   * \param [out] vx_scalar
+   * \ingroup group_vision_function_compare_image
+   */
+  VX_KERNEL_COMPARE_IMAGE =
+      VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0x9,
 
-     /*!
-      * \brief Copies an image from a memory area.
-      * \param [in] void *
-      * \param [out] vx_image
-      * \see group_vision_function_copy_ptr
-      */
-     VX_KERNEL_COPY_IMAGE_FROM_PTR = VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0xA,
+  /*!
+   * \brief Copies an image from a memory area.
+   * \param [in] void *
+   * \param [out] vx_image
+   * \see group_vision_function_copy_ptr
+   */
+  VX_KERNEL_COPY_IMAGE_FROM_PTR =
+      VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_DEBUG) + 0xA,
 };
 
 /******************************************************************************/
@@ -180,7 +191,8 @@ vx_node vxCopyArrayNode(vx_graph graph, vx_array input, vx_array output);
  * \note Graph Mode Function.
  * \ingroup group_vision_function_fwrite_image
  */
-vx_node vxFWriteImageNode(vx_graph graph, vx_image image, vx_char name[VX_MAX_FILE_NAME]);
+vx_node vxFWriteImageNode(vx_graph graph, vx_image image,
+                          vx_char name[VX_MAX_FILE_NAME]);
 
 /*! \brief [Graph] Writes the source array to the file.
  * \param [in] graph The handle to the graph.
@@ -189,7 +201,8 @@ vx_node vxFWriteImageNode(vx_graph graph, vx_image image, vx_char name[VX_MAX_FI
  * \note Graph Mode Function.
  * \ingroup group_vision_function_fwrite_array
  */
-vx_node vxFWriteArrayNode(vx_graph graph, vx_array array, vx_char name[VX_MAX_FILE_NAME]);
+vx_node vxFWriteArrayNode(vx_graph graph, vx_array array,
+                          vx_char name[VX_MAX_FILE_NAME]);
 
 /*! \brief [Graph] Writes the source image to the file.
  * \param [in] graph The handle to the graph.
@@ -198,7 +211,8 @@ vx_node vxFWriteArrayNode(vx_graph graph, vx_array array, vx_char name[VX_MAX_FI
  * \note Graph Mode Function.
  * \ingroup group_vision_function_fread_image
  */
-vx_node vxFReadImageNode(vx_graph graph, vx_char name[VX_MAX_FILE_NAME], vx_image image);
+vx_node vxFReadImageNode(vx_graph graph, vx_char name[VX_MAX_FILE_NAME],
+                         vx_image image);
 
 /*! \brief [Graph] Writes the source array to the file.
  * \param [in] graph The handle to the graph.
@@ -207,7 +221,8 @@ vx_node vxFReadImageNode(vx_graph graph, vx_char name[VX_MAX_FILE_NAME], vx_imag
  * \note Graph Mode Function.
  * \ingroup group_vision_function_fread_array
  */
-vx_node vxFReadArrayNode(vx_graph graph, vx_char name[VX_MAX_FILE_NAME], vx_array array);
+vx_node vxFReadArrayNode(vx_graph graph, vx_char name[VX_MAX_FILE_NAME],
+                         vx_array array);
 
 /*! \brief [Graph] Adds 1 to each uint8 pixel. This will clamp at 255.
  * \param [in] graph The handle to the graph.
@@ -236,7 +251,8 @@ vx_node vxFillImageNode(vx_graph graph, vx_uint32 value, vx_image output);
  * \note Graph Mode Function
  * \ingroup group_vision_function_check_image
  */
-vx_node vxCheckImageNode(vx_graph graph, vx_image input, vx_uint32 value, vx_scalar errs);
+vx_node vxCheckImageNode(vx_graph graph, vx_image input, vx_uint32 value,
+                         vx_scalar errs);
 
 /*!
  * \brief [Graph] Checks a array for a known value.
@@ -247,19 +263,20 @@ vx_node vxCheckImageNode(vx_graph graph, vx_image input, vx_uint32 value, vx_sca
  * \note Graph Mode Function
  * \ingroup group_vision_function_check_array
  */
-vx_node vxCheckArrayNode(vx_graph graph, vx_array input, vx_uint8 value, vx_scalar errs);
+vx_node vxCheckArrayNode(vx_graph graph, vx_array input, vx_uint8 value,
+                         vx_scalar errs);
 
 /*!
- * \brief [Graph] Compares two images and returns the number of pixel sub-channels
- * which are different.
- * \param [in] graph The handle to the graph.
+ * \brief [Graph] Compares two images and returns the number of pixel
+ * sub-channels which are different. \param [in] graph The handle to the graph.
  * \param [in] a The first image.
  * \param [in] b The second image.
  * \param [out] diffs The handle to scalar to hold the number of differences.
  * \note Graph Mode Function
  * \ingroup group_vision_function_compare_image
  */
-vx_node vxCompareImagesNode(vx_graph graph, vx_image a, vx_image b, vx_scalar diffs);
+vx_node vxCompareImagesNode(vx_graph graph, vx_image a, vx_image b,
+                            vx_scalar diffs);
 
 /*! \brief [Graph] Copies a HOST memory area into an image.
  * \param [in] graph The handle to the graph.
@@ -296,7 +313,8 @@ vx_status vxuCopyArray(vx_context context, vx_array src, vx_array dst);
  * \note Immediate Mode Function.
  * \ingroup group_vision_function_fwrite_image
  */
-vx_status vxuFWriteImage(vx_context context, vx_image image, vx_char name[VX_MAX_FILE_NAME]);
+vx_status vxuFWriteImage(vx_context context, vx_image image,
+                         vx_char name[VX_MAX_FILE_NAME]);
 
 /*! \brief [Immediate] Writes the source array to the file.
  * \param [in] array The input array.
@@ -304,15 +322,17 @@ vx_status vxuFWriteImage(vx_context context, vx_image image, vx_char name[VX_MAX
  * \note Immediate Mode Function.
  * \ingroup group_vision_function_fwrite_array
  */
-vx_status vxuFWriteArray(vx_context context, vx_array array, vx_char name[VX_MAX_FILE_NAME]);
+vx_status vxuFWriteArray(vx_context context, vx_array array,
+                         vx_char name[VX_MAX_FILE_NAME]);
 
 /*! \brief [Immediate] Reads the source image from the file.
  * \param [in] name The name of the file.
  * \param [out] image The output image.
-  * \note Immediate Mode Function.
+ * \note Immediate Mode Function.
  * \ingroup group_vision_function_fread_image
  */
-vx_status vxuFReadImage(vx_context context, vx_char name[VX_MAX_FILE_NAME], vx_image image);
+vx_status vxuFReadImage(vx_context context, vx_char name[VX_MAX_FILE_NAME],
+                        vx_image image);
 
 /*! \brief [Immediate] Reads the source array from the file.
  * \param [in] name The name of the file.
@@ -320,7 +340,8 @@ vx_status vxuFReadImage(vx_context context, vx_char name[VX_MAX_FILE_NAME], vx_i
  * \note Immediate Mode Function.
  * \ingroup group_vision_function_fread_array
  */
-vx_status vxuFReadArray(vx_context context, vx_char name[VX_MAX_FILE_NAME], vx_array array);
+vx_status vxuFReadArray(vx_context context, vx_char name[VX_MAX_FILE_NAME],
+                        vx_array array);
 
 /*! \brief [Immediate] Adds 1 to each uint8 pixel. This will clamp at 255.
  * \param [in,out] image The image to increment.
@@ -346,7 +367,8 @@ vx_status vxuFillImage(vx_context context, vx_uint32 value, vx_image output);
  * \note Immediate Mode Function
  * \ingroup group_vision_function_check_image
  */
-vx_status vxuCheckImage(vx_context context, vx_image input, vx_uint32 value, vx_uint32 *numErrors);
+vx_status vxuCheckImage(vx_context context, vx_image input, vx_uint32 value,
+                        vx_uint32 *numErrors);
 
 /*!
  * \brief [Immediate] Checks a array for a known value.
@@ -356,18 +378,18 @@ vx_status vxuCheckImage(vx_context context, vx_image input, vx_uint32 value, vx_
  * \note Immediate Mode Function
  * \ingroup group_vision_function_check_array
  */
-vx_status vxuCheckArray(vx_context context, vx_array input, vx_uint8 value, vx_uint32 *numErrors);
+vx_status vxuCheckArray(vx_context context, vx_array input, vx_uint8 value,
+                        vx_uint32 *numErrors);
 
 /*!
- * \brief [Immediate] Compares two images and returns the number of pixel sub-channels
- * which are different.
- * \param [in] a The first image.
- * \param [in] b The second image.
- * \param [out] numDiffs The handle to scalar to hold the number of differences.
- * \note Immediate Mode Function
- * \ingroup group_vision_function_compare_image
+ * \brief [Immediate] Compares two images and returns the number of pixel
+ * sub-channels which are different. \param [in] a The first image. \param [in]
+ * b The second image. \param [out] numDiffs The handle to scalar to hold the
+ * number of differences. \note Immediate Mode Function \ingroup
+ * group_vision_function_compare_image
  */
-vx_status vxuCompareImages(vx_context context, vx_image a, vx_image b, vx_uint32 *numDiffs);
+vx_status vxuCompareImages(vx_context context, vx_image a, vx_image b,
+                           vx_uint32 *numDiffs);
 
 /*! \brief [Immediate] Copies a HOST memory area into an image.
  * \param [in] ptr The input pointer to the memory area to copy.
@@ -382,4 +404,3 @@ vx_status vxuCopyImageFromPtr(vx_context context, void *ptr, vx_image output);
 #endif
 
 #endif
-

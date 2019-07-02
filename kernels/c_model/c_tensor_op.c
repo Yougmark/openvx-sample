@@ -43,7 +43,7 @@
 //
 //        index /= out_dims[d];
 //#else   // ignore broadcast (possible out-of-bounds access if broadcast's
-//present)
+// present)
 //        res += in_strides[d] * (index % in_dims[d]);
 //        index /= in_dims[d];
 //#endif

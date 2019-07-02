@@ -219,7 +219,7 @@ V4L2_to_VX_DF_IMAGE_t codes[] = {
     {V4L2_PIX_FMT_NV12, VX_DF_IMAGE_NV12, sizeof(uint8_t),
      VX_COLOR_SPACE_BT601_625},
     //{V4L2_PIX_FMT_BGR24, VX_DF_IMAGE_BGR, sizeof(uint8_t), 0}, // I don't
-    //think this is supported by capture or displays we use
+    // think this is supported by capture or displays we use
     {V4L2_PIX_FMT_RGB24, VX_DF_IMAGE_RGB, sizeof(uint8_t), 0},
     {V4L2_PIX_FMT_RGB32, VX_DF_IMAGE_RGBX, sizeof(uint8_t),
      0},  // we'll use a global alpha
