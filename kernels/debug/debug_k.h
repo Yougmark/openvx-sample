@@ -21,21 +21,12 @@
 #include <VX/vx.h>
 #include <VX/vx_helper.h>
 
-#define FGETS(str, fh)                              \
-{                                                   \
-    char* success = fgets(str, sizeof(str), fh);    \
-    if (!success)                                   \
-    {                                               \
-        printf("fgets failed\n");                   \
-    }                                               \
-}
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-vx_status ownFWriteImage (vx_image input, vx_array filename);
-vx_status ownFReadImage  (vx_array filename, vx_image output);
+vx_status ownFWriteImage(vx_image input, vx_array filename);
+vx_status ownFReadImage(vx_array filename, vx_image output);
 
 vx_status ownCopyImage(vx_image input, vx_image output);
 vx_status ownCopyArray(vx_array src, vx_array dst);
@@ -45,4 +36,3 @@ vx_status ownCopyArray(vx_array src, vx_array dst);
 #endif
 
 #endif  // !_VX_DEBUG_K_H_
-

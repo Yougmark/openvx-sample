@@ -34,8 +34,9 @@
  * \ingroup group_int_node
  */
 enum vx_node_attribute_internal_e {
-    /*\brief The attribute used to get the pointer to tile local memory */
-    VX_NODE_ATTRIBUTE_TILE_MEMORY_PTR = VX_ATTRIBUTE_BASE(VX_ID_KHRONOS, VX_TYPE_NODE) + 0xD,
+  /*\brief The attribute used to get the pointer to tile local memory */
+  VX_NODE_ATTRIBUTE_TILE_MEMORY_PTR =
+      VX_ATTRIBUTE_BASE(VX_ID_KHRONOS, VX_TYPE_NODE) + 0xD,
 };
 
 /*! \brief Node parameter setter, no check.
@@ -43,9 +44,9 @@ enum vx_node_attribute_internal_e {
  */
 void ownNodeSetParameter(vx_node node, vx_uint32 index, vx_reference value);
 
- /*! \brief Used to print the values of the node.
-  * \ingroup group_int_node
-  */
+/*! \brief Used to print the values of the node.
+ * \ingroup group_int_node
+ */
 void ownPrintNode(vx_node node);
 
 /*! \brief Used to completely destroy a node.

@@ -15,7 +15,6 @@
  * limitations under the License.
  */
 
-
 #ifndef _OPENVX_INT_META_FORMAT_H_
 #define _OPENVX_INT_META_FORMAT_H_
 

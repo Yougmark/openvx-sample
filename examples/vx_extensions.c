@@ -16,25 +16,23 @@
  */
 
 #include <VX/vx.h>
-#include <string.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 vx_status vx_example_extensions(vx_context context) {
-//! [extensions]
-    vx_char *tmp, *extensions = NULL;
-    vx_size size = 0;
-    vxQueryContext(context,VX_CONTEXT_EXTENSIONS_SIZE,&size,sizeof(size));
-    extensions = malloc(size);
-    vxQueryContext(context,VX_CONTEXT_EXTENSIONS,
-                   extensions, size);
-//! [extensions]
-    tmp = strtok(extensions, " ");
-    do {
-        if (tmp)
-            printf("Extension: %s\n", tmp);
-        tmp = strtok(NULL, " ");
-    } while (tmp);
-    free(extensions);
-    return VX_SUCCESS;
+  //! [extensions]
+  vx_char *tmp, *extensions = NULL;
+  vx_size size = 0;
+  vxQueryContext(context, VX_CONTEXT_EXTENSIONS_SIZE, &size, sizeof(size));
+  extensions = malloc(size);
+  vxQueryContext(context, VX_CONTEXT_EXTENSIONS, extensions, size);
+  //! [extensions]
+  tmp = strtok(extensions, " ");
+  do {
+    if (tmp) printf("Extension: %s\n", tmp);
+    tmp = strtok(NULL, " ");
+  } while (tmp);
+  free(extensions);
+  return VX_SUCCESS;
 }

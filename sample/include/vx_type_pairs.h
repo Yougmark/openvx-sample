@@ -18,26 +18,26 @@
 #ifndef _OPENVX_INT_type_pairs_H_
 #define _OPENVX_INT_type_pairs_H_
 
-#include <stdint.h>
 #include <VX/vx.h>
+#include <stdint.h>
 
 /*! \brief The enum string structure
  * \ingroup group_int_type_pairs
  */
 typedef struct _vx_enum_string_t {
-    /*! \brief The data type enumeration */
-    vx_enum type;
-    /*! \brief A character string to hold the name of the data type enum */
-    vx_char name[64];
-    /*! \brief Value of how many nibbles the data type uses */
-    uintmax_t nibbles;
+  /*! \brief The data type enumeration */
+  vx_enum type;
+  /*! \brief A character string to hold the name of the data type enum */
+  vx_char name[64];
+  /*! \brief Value of how many nibbles the data type uses */
+  uintmax_t nibbles;
 } vx_enum_string_t;
 
 extern vx_enum_string_t type_pairs[];
 
 vx_int32 ownStringFromType(vx_enum type);
 
-#if defined (OPENVX_USE_XML)
+#if defined(OPENVX_USE_XML)
 vx_status ownTypeFromString(char *string, vx_enum *type);
 vx_size ownMetaSizeOfType(vx_enum type);
 #endif

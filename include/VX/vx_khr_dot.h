@@ -18,7 +18,7 @@
 #ifndef _VX_KHR_DOT_H_
 #define _VX_KHR_DOT_H_
 
-#define OPENVX_KHR_DOT  "vx_khr_dot"
+#define OPENVX_KHR_DOT "vx_khr_dot"
 
 #include <VX/vx.h>
 
@@ -39,4 +39,3 @@ vx_status vxExportGraphToDot(vx_graph g, vx_char dotfile[], vx_bool showData);
 #endif
 
 #endif
-

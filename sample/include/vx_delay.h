@@ -50,7 +50,7 @@ vx_delay ownAllocateDelay(vx_size count);
  * the historical nature.
  * \ingroup group_int_delay
  */
-vx_reference ownGetRefFromDelay(vx_delay  delay, vx_int32 index);
+vx_reference ownGetRefFromDelay(vx_delay delay, vx_int32 index);
 
 /*! \brief Adds an association to a node to a delay slot object reference.
  * \param [in] value The delay slot object reference.
@@ -58,16 +58,14 @@ vx_reference ownGetRefFromDelay(vx_delay  delay, vx_int32 index);
  * \param [in] i The index of the parameter.
  * \param [in] d The direction of the parameter.
  */
-vx_bool ownAddAssociationToDelay(vx_reference value,
-                                 vx_node n, vx_uint32 i);
+vx_bool ownAddAssociationToDelay(vx_reference value, vx_node n, vx_uint32 i);
 
 /*! \brief Removes an association to a node from a delay slot object reference.
  * \param [in] value The delay slot object reference.
  * \param [in] n The node reference.
  * \param [in] i The index of the parameter.
  */
-vx_bool ownRemoveAssociationToDelay(vx_reference value,
-                                    vx_node n, vx_uint32 i);
+vx_bool ownRemoveAssociationToDelay(vx_reference value, vx_node n, vx_uint32 i);
 
 /*! \brief Destroys a Delay and it's scoped-objects. */
 void ownDestructDelay(vx_reference ref);

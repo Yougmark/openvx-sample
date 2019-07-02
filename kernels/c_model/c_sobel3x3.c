@@ -25,22 +25,22 @@ static vx_int16 sobel_x[3][3] = {
 
 static vx_int16 sobel_y[3][3] = {
     {-1, -2, -1},
-    { 0,  0,  0},
+    {0, 0, 0},
     {+1, +2, +1},
 };
 
 // nodeless version of the Sobel3x3 kernel
-vx_status vxSobel3x3(vx_image input, vx_image grad_x, vx_image grad_y, vx_border_t *bordermode)
-{
-    if (grad_x) {
-        vx_status status = vxConvolution3x3(input, grad_x, sobel_x, bordermode);
-        if (status != VX_SUCCESS) return status;
-    }
+vx_status vxSobel3x3(vx_image input, vx_image grad_x, vx_image grad_y,
+                     vx_border_t *bordermode) {
+  if (grad_x) {
+    vx_status status = vxConvolution3x3(input, grad_x, sobel_x, bordermode);
+    if (status != VX_SUCCESS) return status;
+  }
 
-    if (grad_y) {
-        vx_status status = vxConvolution3x3(input, grad_y, sobel_y, bordermode);
-        if (status != VX_SUCCESS) return status;
-    }
+  if (grad_y) {
+    vx_status status = vxConvolution3x3(input, grad_y, sobel_y, bordermode);
+    if (status != VX_SUCCESS) return status;
+  }
 
-    return VX_SUCCESS;
+  return VX_SUCCESS;
 }

@@ -22,17 +22,18 @@
  * \file
  */
 
-#define OPENVX_KHR_INTERP   "vx_khr_interpolation"
+#define OPENVX_KHR_INTERP "vx_khr_interpolation"
 
 #include <VX/vx.h>
 
 /*! \brief Additional interpolation types */
 enum vx_interpolation_type_ext_e {
-    /*! \brief Bicubic interpolation method */
-    VX_INTERPOLATION_BICUBIC = VX_ENUM_BASE(VX_ID_KHRONOS, VX_ENUM_INTERPOLATION) + 0x3,
-    /*! \brief Mipmapping interpolation method */
-    VX_INTERPOLATION_MIPMAP = VX_ENUM_BASE(VX_ID_KHRONOS, VX_ENUM_INTERPOLATION) + 0x4,
+  /*! \brief Bicubic interpolation method */
+  VX_INTERPOLATION_BICUBIC =
+      VX_ENUM_BASE(VX_ID_KHRONOS, VX_ENUM_INTERPOLATION) + 0x3,
+  /*! \brief Mipmapping interpolation method */
+  VX_INTERPOLATION_MIPMAP =
+      VX_ENUM_BASE(VX_ID_KHRONOS, VX_ENUM_INTERPOLATION) + 0x4,
 };
 
 #endif
-

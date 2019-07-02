@@ -31,13 +31,13 @@
  * \brief Internal Context API
  */
 
-/*! \brief The implementation string which is of the format "<vendor>.<substring>" */
+/*! \brief The implementation string which is of the format
+ * "<vendor>.<substring>" */
 extern const vx_char implementation[];
 
-/*! \brief This returns true if the type is within the definition of types in OpenVX.
- * \note VX_TYPE_INVALID is not valid for determining a type.
- * \param [in] type The \ref vx_type_e value.
- * \ingroup group_int_context
+/*! \brief This returns true if the type is within the definition of types in
+ * OpenVX. \note VX_TYPE_INVALID is not valid for determining a type. \param
+ * [in] type The \ref vx_type_e value. \ingroup group_int_context
  */
 vx_bool ownIsValidType(vx_enum type);
 
@@ -59,13 +59,9 @@ vx_bool ownIsValidContext(vx_context context);
  * will allocate memory if needed.
  * \ingroup group_int_context
  */
-vx_bool ownAddAccessor(vx_context context,
-                      vx_size size,
-                      vx_enum usage,
-                      void *ptr,
-                      vx_reference ref,
-                      vx_uint32 *pIndex,
-                      void *extra_data);
+vx_bool ownAddAccessor(vx_context context, vx_size size, vx_enum usage,
+                       void *ptr, vx_reference ref, vx_uint32 *pIndex,
+                       void *extra_data);
 
 /*! \brief Finds the accessor in the list and returns the index.
  * \ingroup group_int_context
@@ -77,30 +73,21 @@ vx_bool ownFindAccessor(vx_context context, const void *ptr, vx_uint32 *pIndex);
  */
 void ownRemoveAccessor(vx_context context, vx_uint32 index);
 
-
 /*! \brief Searches the memory maps list to find an open slot and
  *  allocate memory for mapped buffer.
  * \ingroup group_int_context
  */
-VX_INT_API vx_bool ownMemoryMap(
-    vx_context   context,
-    vx_reference ref,
-    vx_size      size,
-    vx_enum      usage,
-    vx_enum      mem_type,
-    vx_uint32    flags,
-    void*        extra_data,
-    void**       ptr,
-    vx_map_id*   map_id);
+VX_INT_API vx_bool ownMemoryMap(vx_context context, vx_reference ref,
+                                vx_size size, vx_enum usage, vx_enum mem_type,
+                                vx_uint32 flags, void *extra_data, void **ptr,
+                                vx_map_id *map_id);
 
 /*! \brief Checks the consistency of given ref & map_id by looking
-*  into memory maps list.
+ *  into memory maps list.
  * \ingroup group_int_context
-*/
-VX_INT_API vx_bool ownFindMemoryMap(
-    vx_context   context,
-    vx_reference ref,
-    vx_map_id    map_id);
+ */
+VX_INT_API vx_bool ownFindMemoryMap(vx_context context, vx_reference ref,
+                                    vx_map_id map_id);
 
 /*! \brief Finds and removes a map_id from the list.
  * \ingroup group_int_context

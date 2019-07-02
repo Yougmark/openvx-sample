@@ -18,8 +18,8 @@
 #ifndef _OPENVX_INTERFACE_H_
 #define _OPENVX_INTERFACE_H_
 
-#include <c_model.h>
 #include <VX/vx_helper.h>
+#include <c_model.h>
 
 extern vx_kernel_description_t colorconvert_kernel;
 extern vx_kernel_description_t channelextract_kernel;
@@ -101,6 +101,4 @@ extern vx_kernel_description_t nn_activation_kernel;
 extern vx_kernel_description_t nn_roipooling_kernel;
 #endif
 
-
 #endif
-

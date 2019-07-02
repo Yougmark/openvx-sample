@@ -20,21 +20,31 @@
 
 /*! \brief The list of example tiling kernels */
 enum vx_tiling_kernels_e {
-    /*! \brief a re-implementation of a gaussian blur */
-    VX_KERNEL_GAUSSIAN_3x3_TILING = VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_BASE) + 0x100,
-    /*! \brief a re-implementation of a generic box filter of any size */
-    VX_KERNEL_BOX_MxN_TILING = VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_BASE) + 0x101,
-    /*! \brief a re-implementation of a add kernel */
-    VX_KERNEL_ADD_TILING = VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_BASE) + 0x102,
-    /*! \brief an alpha multiply kernel */
-    VX_KERNEL_ALPHA_TILING = VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_BASE) + 0x103,
+  /*! \brief a re-implementation of a gaussian blur */
+  VX_KERNEL_GAUSSIAN_3x3_TILING =
+      VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_BASE) + 0x100,
+  /*! \brief a re-implementation of a generic box filter of any size */
+  VX_KERNEL_BOX_MxN_TILING =
+      VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_BASE) + 0x101,
+  /*! \brief a re-implementation of a add kernel */
+  VX_KERNEL_ADD_TILING =
+      VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_BASE) + 0x102,
+  /*! \brief an alpha multiply kernel */
+  VX_KERNEL_ALPHA_TILING =
+      VX_KERNEL_BASE(VX_ID_KHRONOS, VX_LIBRARY_KHR_BASE) + 0x103,
 };
 
 #ifdef _VX_TILING_EXT_INTERNAL_
-void add_image_tiling(void * VX_RESTRICT parameters[VX_RESTRICT], void * VX_RESTRICT tile_memory, vx_size tile_memory_size);
-void alpha_image_tiling(void * VX_RESTRICT parameters[VX_RESTRICT], void * VX_RESTRICT tile_memory, vx_size tile_memory_size);
-void box_image_tiling(void * VX_RESTRICT parameters[VX_RESTRICT], void * VX_RESTRICT tile_memory, vx_size tile_memory_size);
-void gaussian_image_tiling_fast(void * VX_RESTRICT parameters[VX_RESTRICT], void * VX_RESTRICT tile_memory, vx_size tile_memory_size);
+void add_image_tiling(void* VX_RESTRICT parameters[VX_RESTRICT],
+                      void* VX_RESTRICT tile_memory, vx_size tile_memory_size);
+void alpha_image_tiling(void* VX_RESTRICT parameters[VX_RESTRICT],
+                        void* VX_RESTRICT tile_memory,
+                        vx_size tile_memory_size);
+void box_image_tiling(void* VX_RESTRICT parameters[VX_RESTRICT],
+                      void* VX_RESTRICT tile_memory, vx_size tile_memory_size);
+void gaussian_image_tiling_fast(void* VX_RESTRICT parameters[VX_RESTRICT],
+                                void* VX_RESTRICT tile_memory,
+                                vx_size tile_memory_size);
 #endif
 
 #endif

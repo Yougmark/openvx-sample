@@ -23,98 +23,88 @@
 
 #include <VX/vx.h>
 #include <VX/vx_helper.h>
-#include "vx_internal.h"
 #include <c_model.h>
 #include <math.h>
+#include "vx_internal.h"
 
-static vx_status VX_CALLBACK vxMagnitudeKernel(vx_node node, const vx_reference *parameters, vx_uint32 num)
-{
-    (void)node;
+static vx_status VX_CALLBACK vxMagnitudeKernel(vx_node node,
+                                               const vx_reference *parameters,
+                                               vx_uint32 num) {
+  (void)node;
 
-    if (num == 3)
-    {
-        vx_image grad_x = (vx_image)parameters[0];
-        vx_image grad_y = (vx_image)parameters[1];
-        vx_image output = (vx_image)parameters[2];
-        return vxMagnitude(grad_x, grad_y, output);
-    }
-    return VX_ERROR_INVALID_PARAMETERS;
+  if (num == 3) {
+    vx_image grad_x = (vx_image)parameters[0];
+    vx_image grad_y = (vx_image)parameters[1];
+    vx_image output = (vx_image)parameters[2];
+    return vxMagnitude(grad_x, grad_y, output);
+  }
+  return VX_ERROR_INVALID_PARAMETERS;
 }
 
-static vx_status VX_CALLBACK vxMagnitudeInputValidator(vx_node node, vx_uint32 index)
-{
-    vx_status status = VX_ERROR_INVALID_PARAMETERS;
-    if (index == 0 || index == 1)
-    {
-        vx_image input = 0;
-        vx_parameter param = vxGetParameterByIndex(node, index);
+static vx_status VX_CALLBACK vxMagnitudeInputValidator(vx_node node,
+                                                       vx_uint32 index) {
+  vx_status status = VX_ERROR_INVALID_PARAMETERS;
+  if (index == 0 || index == 1) {
+    vx_image input = 0;
+    vx_parameter param = vxGetParameterByIndex(node, index);
 
-        vxQueryParameter(param, VX_PARAMETER_REF, &input, sizeof(input));
-        if (input)
-        {
-            vx_df_image format = 0;
-            vxQueryImage(input, VX_IMAGE_FORMAT, &format, sizeof(format));
-            if (format == VX_DF_IMAGE_S16)
-            {
-                if (index == 0)
-                {
-                    status = VX_SUCCESS;
-                }
-                else
-                {
-                    vx_parameter param0 = vxGetParameterByIndex(node, index);
-                    vx_image input0 = 0;
+    vxQueryParameter(param, VX_PARAMETER_REF, &input, sizeof(input));
+    if (input) {
+      vx_df_image format = 0;
+      vxQueryImage(input, VX_IMAGE_FORMAT, &format, sizeof(format));
+      if (format == VX_DF_IMAGE_S16) {
+        if (index == 0) {
+          status = VX_SUCCESS;
+        } else {
+          vx_parameter param0 = vxGetParameterByIndex(node, index);
+          vx_image input0 = 0;
 
-                    vxQueryParameter(param0, VX_PARAMETER_REF, &input0, sizeof(input0));
-                    if (input0)
-                    {
-                        vx_uint32 width0 = 0, height0 = 0, width1 = 0, height1 = 0;
-                        vxQueryImage(input0, VX_IMAGE_WIDTH, &width0, sizeof(width0));
-                        vxQueryImage(input0, VX_IMAGE_HEIGHT, &height0, sizeof(height0));
-                        vxQueryImage(input, VX_IMAGE_WIDTH, &width1, sizeof(width1));
-                        vxQueryImage(input, VX_IMAGE_HEIGHT, &height1, sizeof(height1));
+          vxQueryParameter(param0, VX_PARAMETER_REF, &input0, sizeof(input0));
+          if (input0) {
+            vx_uint32 width0 = 0, height0 = 0, width1 = 0, height1 = 0;
+            vxQueryImage(input0, VX_IMAGE_WIDTH, &width0, sizeof(width0));
+            vxQueryImage(input0, VX_IMAGE_HEIGHT, &height0, sizeof(height0));
+            vxQueryImage(input, VX_IMAGE_WIDTH, &width1, sizeof(width1));
+            vxQueryImage(input, VX_IMAGE_HEIGHT, &height1, sizeof(height1));
 
-                        if (width0 == width1 && height0 == height1)
-                            status = VX_SUCCESS;
-                        vxReleaseImage(&input0);
-                    }
-                    vxReleaseParameter(&param0);
-                }
-            }
-            vxReleaseImage(&input);
+            if (width0 == width1 && height0 == height1) status = VX_SUCCESS;
+            vxReleaseImage(&input0);
+          }
+          vxReleaseParameter(&param0);
         }
-        vxReleaseParameter(&param);
+      }
+      vxReleaseImage(&input);
     }
-    return status;
+    vxReleaseParameter(&param);
+  }
+  return status;
 }
 
-static vx_status VX_CALLBACK vxMagnitudeOutputValidator(vx_node node, vx_uint32 index, vx_meta_format_t *ptr)
-{
-    vx_status status = VX_ERROR_INVALID_PARAMETERS;
-    if (index == 2)
-    {
-        vx_parameter param  = vxGetParameterByIndex(node, 0);
-        if (vxGetStatus((vx_reference)param) == VX_SUCCESS)
-        {
-            vx_image input = 0;
-            vxQueryParameter(param, VX_PARAMETER_REF, &input, sizeof(input));
-            if (input)
-            {
-                vx_uint32 width = 0, height = 0;
+static vx_status VX_CALLBACK vxMagnitudeOutputValidator(vx_node node,
+                                                        vx_uint32 index,
+                                                        vx_meta_format_t *ptr) {
+  vx_status status = VX_ERROR_INVALID_PARAMETERS;
+  if (index == 2) {
+    vx_parameter param = vxGetParameterByIndex(node, 0);
+    if (vxGetStatus((vx_reference)param) == VX_SUCCESS) {
+      vx_image input = 0;
+      vxQueryParameter(param, VX_PARAMETER_REF, &input, sizeof(input));
+      if (input) {
+        vx_uint32 width = 0, height = 0;
 
-                vxQueryImage(input, VX_IMAGE_WIDTH, &width, sizeof(width));
-                vxQueryImage(input, VX_IMAGE_HEIGHT, &height, sizeof(height));
-                ptr->type = VX_TYPE_IMAGE;
-                ptr->dim.image.format = VX_DF_IMAGE_S16;
-                ptr->dim.image.width = width;
-                ptr->dim.image.height = height;
-                status = VX_SUCCESS;
-                vxReleaseImage(&input);
-            }
-            vxReleaseParameter(&param);
-        }
+        vxQueryImage(input, VX_IMAGE_WIDTH, &width, sizeof(width));
+        vxQueryImage(input, VX_IMAGE_HEIGHT, &height, sizeof(height));
+        ptr->type = VX_TYPE_IMAGE;
+        ptr->dim.image.format = VX_DF_IMAGE_S16;
+        ptr->dim.image.width = width;
+        ptr->dim.image.height = height;
+        status = VX_SUCCESS;
+        vxReleaseImage(&input);
+      }
+      vxReleaseParameter(&param);
     }
-    return status;
+  }
+  return status;
 }
 
 static vx_param_description_t magnitude_kernel_params[] = {
@@ -127,11 +117,11 @@ vx_kernel_description_t magnitude_kernel = {
     VX_KERNEL_MAGNITUDE,
     "org.khronos.openvx.magnitude",
     vxMagnitudeKernel,
-    magnitude_kernel_params, dimof(magnitude_kernel_params),
+    magnitude_kernel_params,
+    dimof(magnitude_kernel_params),
     NULL,
     vxMagnitudeInputValidator,
     vxMagnitudeOutputValidator,
     NULL,
     NULL,
 };
-

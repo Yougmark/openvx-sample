@@ -21,19 +21,16 @@
 #include <VX/vx.h>
 #include "vx_internal.h"
 
-static VX_INLINE void *ownFormatMemoryPtr(vx_memory_t *memory,
-                                          vx_uint32 c,
-                                          vx_uint32 x,
-                                          vx_uint32 y,
-                                          vx_uint32 p)
-{
-    intmax_t offset = (memory->strides[p][VX_DIM_Y] * y) +
-                      (memory->strides[p][VX_DIM_X] * x) +
-                      (memory->strides[p][VX_DIM_C] * c);
-    void *ptr = (void *)&memory->ptrs[p][offset];
-    //ownPrintMemory(memory);
-    //VX_PRINT(VX_ZONE_INFO, "&(%p[%zu]) = %p\n", memory->ptrs[p], offset, ptr);
-    return ptr;
+static VX_INLINE void *ownFormatMemoryPtr(vx_memory_t *memory, vx_uint32 c,
+                                          vx_uint32 x, vx_uint32 y,
+                                          vx_uint32 p) {
+  intmax_t offset = (memory->strides[p][VX_DIM_Y] * y) +
+                    (memory->strides[p][VX_DIM_X] * x) +
+                    (memory->strides[p][VX_DIM_C] * c);
+  void *ptr = (void *)&memory->ptrs[p][offset];
+  // ownPrintMemory(memory);
+  // VX_PRINT(VX_ZONE_INFO, "&(%p[%zu]) = %p\n", memory->ptrs[p], offset, ptr);
+  return ptr;
 }
 
 #endif

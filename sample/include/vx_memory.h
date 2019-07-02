@@ -44,4 +44,3 @@ void ownPrintMemory(vx_memory_t *mem);
 vx_size ownComputeMemorySize(vx_memory_t *memory, vx_uint32 p);
 
 #endif
-

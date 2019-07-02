@@ -22,24 +22,31 @@
 
 void ownPrintArray(vx_array array);
 
-vx_array ownCreateArrayInt(vx_context context, vx_enum item_type, vx_size capacity, vx_bool is_virtual, vx_enum type);
+vx_array ownCreateArrayInt(vx_context context, vx_enum item_type,
+                           vx_size capacity, vx_bool is_virtual, vx_enum type);
 
 void ownDestructArray(vx_reference reference);
 
 void ownReleaseArrayInt(vx_array *array);
 
-vx_bool ownInitVirtualArray(vx_array array, vx_enum item_type, vx_size capacity);
+vx_bool ownInitVirtualArray(vx_array array, vx_enum item_type,
+                            vx_size capacity);
 
 vx_bool ownValidateArray(vx_array array, vx_enum item_type, vx_size capacity);
 
 vx_bool ownAllocateArray(vx_array array);
 
-vx_status ownAccessArrayRangeInt(vx_array array, vx_size start, vx_size end, vx_size *pStride, void **ptr, vx_enum usage);
-vx_status ownCommitArrayRangeInt(vx_array array, vx_size start, vx_size end, const void *ptr);
+vx_status ownAccessArrayRangeInt(vx_array array, vx_size start, vx_size end,
+                                 vx_size *pStride, void **ptr, vx_enum usage);
+vx_status ownCommitArrayRangeInt(vx_array array, vx_size start, vx_size end,
+                                 const void *ptr);
 
-vx_status ownCopyArrayRangeInt(vx_array arr, vx_size start, vx_size end, vx_size stride, void *ptr, vx_enum usage, vx_enum mem_type);
-vx_status ownMapArrayRangeInt(vx_array arr, vx_size start, vx_size end, vx_map_id *map_id, vx_size *stride,
-                             void **ptr, vx_enum usage, vx_enum mem_type, vx_uint32 flags);
+vx_status ownCopyArrayRangeInt(vx_array arr, vx_size start, vx_size end,
+                               vx_size stride, void *ptr, vx_enum usage,
+                               vx_enum mem_type);
+vx_status ownMapArrayRangeInt(vx_array arr, vx_size start, vx_size end,
+                              vx_map_id *map_id, vx_size *stride, void **ptr,
+                              vx_enum usage, vx_enum mem_type, vx_uint32 flags);
 vx_status ownUnmapArrayRangeInt(vx_array arr, vx_map_id map_id);
 
 #endif

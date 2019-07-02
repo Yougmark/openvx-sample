@@ -18,46 +18,44 @@
 #include <VX/vx.h>
 #include <VX/vxu.h>
 
-vx_status vxSingleNodeGraph()
-{
-    vx_status status = VX_SUCCESS;
-    vx_uint32 width = 320, height = 240;
-    //! [whole]
-    /* This is an example of a Single Node Graph */
-    //! [context]
-    vx_context context = vxCreateContext();
-    //! [context]
-    //! [data]
-    vx_image in = vxCreateImage(context, width, height, VX_DF_IMAGE_U8);
-    vx_image out = vxCreateImage(context, width, height, VX_DF_IMAGE_U8);
-    //! [data]
-    //! [graph]
-    vx_graph graph = vxCreateGraph(context);
-    //! [graph]
-    //! [node]
-    vx_node node = vxGaussian3x3Node(graph, in, out);
-    //! [node]
+vx_status vxSingleNodeGraph() {
+  vx_status status = VX_SUCCESS;
+  vx_uint32 width = 320, height = 240;
+  //! [whole]
+  /* This is an example of a Single Node Graph */
+  //! [context]
+  vx_context context = vxCreateContext();
+  //! [context]
+  //! [data]
+  vx_image in = vxCreateImage(context, width, height, VX_DF_IMAGE_U8);
+  vx_image out = vxCreateImage(context, width, height, VX_DF_IMAGE_U8);
+  //! [data]
+  //! [graph]
+  vx_graph graph = vxCreateGraph(context);
+  //! [graph]
+  //! [node]
+  vx_node node = vxGaussian3x3Node(graph, in, out);
+  //! [node]
 
-    //! [verify]
-    status = vxVerifyGraph(graph);
-    //! [verify]
-    //! [process]
-    if (status == VX_SUCCESS)
-        status = vxProcessGraph(graph);
-    //! [process]
-    //! [whole]
-    //! [vxu]
-    status = vxuGaussian3x3(context, in, out);
-    //! [vxu]
+  //! [verify]
+  status = vxVerifyGraph(graph);
+  //! [verify]
+  //! [process]
+  if (status == VX_SUCCESS) status = vxProcessGraph(graph);
+  //! [process]
+  //! [whole]
+  //! [vxu]
+  status = vxuGaussian3x3(context, in, out);
+  //! [vxu]
 
-    //! [teardown]
-    vxReleaseNode(&node);
-    /* this also releases any nodes we forgot to release */
-    vxReleaseGraph(&graph);
-    vxReleaseImage(&in);
-    vxReleaseImage(&out);
-    /* this catches anything else we forgot to release */
-    vxReleaseContext(&context);
-    //! [teardown]
-    return status;
+  //! [teardown]
+  vxReleaseNode(&node);
+  /* this also releases any nodes we forgot to release */
+  vxReleaseGraph(&graph);
+  vxReleaseImage(&in);
+  vxReleaseImage(&out);
+  /* this catches anything else we forgot to release */
+  vxReleaseContext(&context);
+  //! [teardown]
+  return status;
 }

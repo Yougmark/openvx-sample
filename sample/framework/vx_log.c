@@ -15,105 +15,88 @@
  * limitations under the License.
  */
 
-#include "vx_internal.h"
 #include "vx_log.h"
+#include "vx_internal.h"
 
-VX_API_ENTRY void VX_API_CALL vxRegisterLogCallback(vx_context context, vx_log_callback_f callback, vx_bool reentrant)
-{
-    vx_context_t *cntxt = (vx_context_t *)context;
-    if (ownIsValidContext(cntxt) == vx_true_e)
-    {
-        ownSemWait(&cntxt->base.lock);
-        if ((cntxt->log_callback == NULL) && (callback != NULL))
-        {
-            cntxt->log_enabled = vx_true_e;
-            if (reentrant == vx_false_e)
-            {
-                ownCreateSem(&cntxt->log_lock, 1);
-            }
-            cntxt->log_reentrant = reentrant;
-        }
-        if ((cntxt->log_callback != NULL) && (callback == NULL))
-        {
-            if (cntxt->log_reentrant == vx_false_e)
-            {
-                ownDestroySem(&cntxt->log_lock);
-            }
-            cntxt->log_enabled = vx_false_e;
-        }
-        if ((cntxt->log_callback != NULL) && (callback != NULL) && (cntxt->log_callback != callback))
-        {
-            if (cntxt->log_reentrant == vx_false_e)
-            {
-                ownDestroySem(&cntxt->log_lock);
-            }
-            if (reentrant == vx_false_e)
-            {
-                ownCreateSem(&cntxt->log_lock, 1);
-            }
-            cntxt->log_reentrant = reentrant;
-        }
-        cntxt->log_callback = callback;
-        ownSemPost(&cntxt->base.lock);
+VX_API_ENTRY void VX_API_CALL vxRegisterLogCallback(vx_context context,
+                                                    vx_log_callback_f callback,
+                                                    vx_bool reentrant) {
+  vx_context_t *cntxt = (vx_context_t *)context;
+  if (ownIsValidContext(cntxt) == vx_true_e) {
+    ownSemWait(&cntxt->base.lock);
+    if ((cntxt->log_callback == NULL) && (callback != NULL)) {
+      cntxt->log_enabled = vx_true_e;
+      if (reentrant == vx_false_e) {
+        ownCreateSem(&cntxt->log_lock, 1);
+      }
+      cntxt->log_reentrant = reentrant;
     }
+    if ((cntxt->log_callback != NULL) && (callback == NULL)) {
+      if (cntxt->log_reentrant == vx_false_e) {
+        ownDestroySem(&cntxt->log_lock);
+      }
+      cntxt->log_enabled = vx_false_e;
+    }
+    if ((cntxt->log_callback != NULL) && (callback != NULL) &&
+        (cntxt->log_callback != callback)) {
+      if (cntxt->log_reentrant == vx_false_e) {
+        ownDestroySem(&cntxt->log_lock);
+      }
+      if (reentrant == vx_false_e) {
+        ownCreateSem(&cntxt->log_lock, 1);
+      }
+      cntxt->log_reentrant = reentrant;
+    }
+    cntxt->log_callback = callback;
+    ownSemPost(&cntxt->base.lock);
+  }
 }
 
-VX_API_ENTRY void VX_API_CALL vxAddLogEntry(vx_reference ref, vx_status status, const char *message, ...)
-{
-    va_list ap;
-    vx_context_t *context = NULL;
-    vx_char string[VX_MAX_LOG_MESSAGE_LEN];
+VX_API_ENTRY void VX_API_CALL vxAddLogEntry(vx_reference ref, vx_status status,
+                                            const char *message, ...) {
+  va_list ap;
+  vx_context_t *context = NULL;
+  vx_char string[VX_MAX_LOG_MESSAGE_LEN];
 
-    if (ownIsValidReference(ref) == vx_false_e)
-    {
-        if (ownIsValidContext((vx_context_t *)ref) == vx_false_e)
-        {
-            VX_PRINT(VX_ZONE_ERROR, "Invalid reference!\n");
-            return;
-        }
+  if (ownIsValidReference(ref) == vx_false_e) {
+    if (ownIsValidContext((vx_context_t *)ref) == vx_false_e) {
+      VX_PRINT(VX_ZONE_ERROR, "Invalid reference!\n");
+      return;
     }
+  }
 
-    if (status == VX_SUCCESS)
-    {
-        VX_PRINT(VX_ZONE_ERROR, "Invalid status code!\n");
-        return;
-    }
-
-    if (message == NULL)
-    {
-        VX_PRINT(VX_ZONE_ERROR, "Invalid message!\n");
-        return;
-    }
-
-    if (ref->type == VX_TYPE_CONTEXT)
-    {
-        context = (vx_context_t *)ref;
-    }
-    else
-    {
-        context = ref->context;
-    }
-
-    if (context->log_callback == NULL)
-    {
-        VX_PRINT(VX_ZONE_ERROR, "No callback is registered\n");
-        return;
-    }
-
-    if (context->log_enabled == vx_false_e)
-    {
-        return;
-    }
-
-    va_start(ap, message);
-    vsnprintf(string, VX_MAX_LOG_MESSAGE_LEN, message, ap);
-    string[VX_MAX_LOG_MESSAGE_LEN-1] = 0; // for MSVC which is not C99 compliant
-    va_end(ap);
-    if (context->log_reentrant == vx_false_e)
-        ownSemWait(&context->log_lock);
-    context->log_callback(context, ref, status, string);
-    if (context->log_reentrant == vx_false_e)
-        ownSemPost(&context->log_lock);
+  if (status == VX_SUCCESS) {
+    VX_PRINT(VX_ZONE_ERROR, "Invalid status code!\n");
     return;
-}
+  }
 
+  if (message == NULL) {
+    VX_PRINT(VX_ZONE_ERROR, "Invalid message!\n");
+    return;
+  }
+
+  if (ref->type == VX_TYPE_CONTEXT) {
+    context = (vx_context_t *)ref;
+  } else {
+    context = ref->context;
+  }
+
+  if (context->log_callback == NULL) {
+    VX_PRINT(VX_ZONE_ERROR, "No callback is registered\n");
+    return;
+  }
+
+  if (context->log_enabled == vx_false_e) {
+    return;
+  }
+
+  va_start(ap, message);
+  vsnprintf(string, VX_MAX_LOG_MESSAGE_LEN, message, ap);
+  string[VX_MAX_LOG_MESSAGE_LEN - 1] =
+      0;  // for MSVC which is not C99 compliant
+  va_end(ap);
+  if (context->log_reentrant == vx_false_e) ownSemWait(&context->log_lock);
+  context->log_callback(context, ref, status, string);
+  if (context->log_reentrant == vx_false_e) ownSemPost(&context->log_lock);
+  return;
+}

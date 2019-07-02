@@ -41,36 +41,42 @@
  * \ingroup group_int_debug
  */
 enum vx_debug_zone_e {
-    VX_ZONE_ERROR       = 0,    /*!< Used for most errors */
-    VX_ZONE_WARNING     = 1,    /*!< Used to warning developers of possible issues */
-    VX_ZONE_API         = 2,    /*!< Used to trace API calls and return values */
-    VX_ZONE_INFO        = 3,    /*!< Used to show run-time processing debug */
+  VX_ZONE_ERROR = 0,   /*!< Used for most errors */
+  VX_ZONE_WARNING = 1, /*!< Used to warning developers of possible issues */
+  VX_ZONE_API = 2,     /*!< Used to trace API calls and return values */
+  VX_ZONE_INFO = 3,    /*!< Used to show run-time processing debug */
 
-    VX_ZONE_PERF        = 4,    /*!< Used to show performance information */
-    VX_ZONE_CONTEXT     = 5,
-    VX_ZONE_OSAL        = 6,
-    VX_ZONE_REFERENCE   = 7,
+  VX_ZONE_PERF = 4, /*!< Used to show performance information */
+  VX_ZONE_CONTEXT = 5,
+  VX_ZONE_OSAL = 6,
+  VX_ZONE_REFERENCE = 7,
 
-    VX_ZONE_ARRAY       = 8,
-    VX_ZONE_IMAGE       = 9,
-    VX_ZONE_SCALAR      = 10,
-    VX_ZONE_KERNEL      = 11,
+  VX_ZONE_ARRAY = 8,
+  VX_ZONE_IMAGE = 9,
+  VX_ZONE_SCALAR = 10,
+  VX_ZONE_KERNEL = 11,
 
-    VX_ZONE_GRAPH       = 12,
-    VX_ZONE_NODE        = 13,
-    VX_ZONE_PARAMETER   = 14,
-    VX_ZONE_DELAY       = 15,
+  VX_ZONE_GRAPH = 12,
+  VX_ZONE_NODE = 13,
+  VX_ZONE_PARAMETER = 14,
+  VX_ZONE_DELAY = 15,
 
-    VX_ZONE_TARGET      = 16,
-    VX_ZONE_LOG         = 17,
+  VX_ZONE_TARGET = 16,
+  VX_ZONE_LOG = 17,
 
-    VX_ZONE_MAX         = 32
+  VX_ZONE_MAX = 32
 };
 
 #if defined(_WIN32) && !defined(__GNUC__)
-#define VX_PRINT(zone, message, ...) do { vx_print(zone, "[%s:%u] "message, __FUNCTION__, __LINE__, __VA_ARGS__); } while (0)
+#define VX_PRINT(zone, message, ...)                                         \
+  do {                                                                       \
+    vx_print(zone, "[%s:%u] " message, __FUNCTION__, __LINE__, __VA_ARGS__); \
+  } while (0)
 #else
-#define VX_PRINT(zone, message, ...) do { vx_print(zone, "[%s:%u] "message, __FUNCTION__, __LINE__, ## __VA_ARGS__); } while (0)
+#define VX_PRINT(zone, message, ...)                                           \
+  do {                                                                         \
+    vx_print(zone, "[%s:%u] " message, __FUNCTION__, __LINE__, ##__VA_ARGS__); \
+  } while (0)
 #endif
 
 /*! \def VX_PRINT
@@ -81,49 +87,57 @@ enum vx_debug_zone_e {
 /*! \brief A debugging macro for entering kernels.
  * \ingroup group_int_debug
  */
-#define VX_KERNEL_ENTRY(params, num) { \
-    vx_uint32 p; \
-    VX_PRINT(VX_ZONE_API, "Entered Kernel! Parameters:\n"); \
-    for (p = 0; p < num; p++) { \
-        VX_PRINT(VX_ZONE_API, "\tparameter[%u]="VX_FMT_REF"\n", p, params[p]); \
-    }\
-}
+#define VX_KERNEL_ENTRY(params, num)                                           \
+  {                                                                            \
+    vx_uint32 p;                                                               \
+    VX_PRINT(VX_ZONE_API, "Entered Kernel! Parameters:\n");                    \
+    for (p = 0; p < num; p++) {                                                \
+      VX_PRINT(VX_ZONE_API, "\tparameter[%u]=" VX_FMT_REF "\n", p, params[p]); \
+    }                                                                          \
+  }
 
 /*! \brief A debugging macro for leaving kernels
  * \ingroup group_int_debug
  */
-#define VX_KERNEL_RETURN(status) VX_PRINT(VX_ZONE_API, "returning %d\n", status);
+#define VX_KERNEL_RETURN(status) \
+  VX_PRINT(VX_ZONE_API, "returning %d\n", status);
 
 #ifndef DEBUG_BREAK
 #if defined(_WIN32) && !defined(__CYGWIN__)
-#define DEBUG_BREAK()  do{ *((int *) NULL) = 0;exit(3); }while(0)
+#define DEBUG_BREAK()   \
+  do {                  \
+    *((int *)NULL) = 0; \
+    exit(3);            \
+  } while (0)
 #else
-#define DEBUG_BREAK()  raise(SIGABRT)
+#define DEBUG_BREAK() raise(SIGABRT)
 #endif
 #endif
 
 #if (defined(__linux__) || defined(__QNX__)) && !defined(__ANDROID__)
 
-#define VX_BACKTRACE(zone) { \
-    void *stack[50]; \
-    int i, cnt = backtrace(stack, dimof(stack)); \
-    char **symbols = backtrace_symbols(stack, cnt); \
-    vx_print(zone, "Backtrace[%d]: (%p)\n", cnt, symbols); \
-    for (i = 0; i < cnt; i++) { \
-        vx_print(zone, "\t[%p] %s\n", stack[i], (symbols ? symbols[i] : NULL)); \
-    } \
-    free(symbols);\
-}
+#define VX_BACKTRACE(zone)                                                    \
+  {                                                                           \
+    void *stack[50];                                                          \
+    int i, cnt = backtrace(stack, dimof(stack));                              \
+    char **symbols = backtrace_symbols(stack, cnt);                           \
+    vx_print(zone, "Backtrace[%d]: (%p)\n", cnt, symbols);                    \
+    for (i = 0; i < cnt; i++) {                                               \
+      vx_print(zone, "\t[%p] %s\n", stack[i], (symbols ? symbols[i] : NULL)); \
+    }                                                                         \
+    free(symbols);                                                            \
+  }
 
 #elif defined(_WIN32) && !defined(__MINGW32__)
 
-#define VX_BACKTRACE(zone) { \
-    PVOID stack[50]; \
+#define VX_BACKTRACE(zone)                                               \
+  {                                                                      \
+    PVOID stack[50];                                                     \
     USHORT i, cnt = CaptureStackBackTrace(0, dimof(stack), stack, NULL); \
-    for (i = 0; i < cnt; i++) { \
-        vx_print(zone, "\t[%p]\n", stack[i]); \
-    } \
-}
+    for (i = 0; i < cnt; i++) {                                          \
+      vx_print(zone, "\t[%p]\n", stack[i]);                              \
+    }                                                                    \
+  }
 
 #else
 
@@ -188,4 +202,3 @@ const char *ownGetObjectTypeName(vx_enum type);
 #endif
 
 #endif
-

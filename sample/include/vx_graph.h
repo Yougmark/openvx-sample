@@ -18,6 +18,8 @@
 #ifndef _OPENVX_INT_GRAPH_H_
 #define _OPENVX_INT_GRAPH_H_
 
+#include "vx_internal.h"
+
 #include <VX/vx.h>
 
 /*!
@@ -33,26 +35,26 @@
 /*! \brief Finds the first node with the reference as an input.
  * \param [in] graph The graph to traverse
  * \param [in] ref The reference to search for.
- * \param [in] pIndex The pointer to the location to store the index of the first match.
- * \ingroup group_int_graph
+ * \param [in] pIndex The pointer to the location to store the index of the
+ * first match. \ingroup group_int_graph
  */
-vx_status ownFindNodeWithInputReference(vx_graph graph, vx_reference ref, vx_uint32 *pIndex);
+vx_status ownFindNodeWithInputReference(vx_graph graph, vx_reference ref,
+                                        vx_uint32 *pIndex);
 
 /*! \brief Finds the first node with the reference as an input. This is called
  * in the context of execution, not verification.
  * \param [in] graph The graph to traverse
  * \param [in] ref The reference to search for.
- * \param [in] pIndex The pointer to the location to store the index of the first match.
- * \ingroup group_int_graph
+ * \param [in] pIndex The pointer to the location to store the index of the
+ * first match. \ingroup group_int_graph
  */
-vx_status ownFindNodeWithOutBiReference(vx_graph graph, vx_reference ref, vx_uint32 *pIndex);
+vx_status ownFindNodeWithOutBiReference(vx_graph graph, vx_reference ref,
+                                        vx_uint32 *pIndex);
 
 /*! \brief */
-vx_status ownFindNodesWithReference(vx_graph graph,
-                                   vx_reference ref,
-                                   vx_uint32 refnodes[],
-                                   vx_uint32 *count,
-                                   vx_enum reftype);
+vx_status ownFindNodesWithReference(vx_graph graph, vx_reference ref,
+                                    vx_uint32 refnodes[], vx_uint32 *count,
+                                    vx_enum reftype);
 
 /*! \brief Clears visited flag.
  * \param [in] graph The graph to clear.
@@ -66,42 +68,38 @@ void ownClearVisitation(vx_graph graph);
  */
 void ownClearExecution(vx_graph graph);
 
-/*! \brief Executes a single node at an index in the graph and captures the performance.
- * \param [in] graph The graph structure.
- * \param [in] index The index of the node to execute.
- * \return Returns the status of the node.
+/*! \brief Executes a single node at an index in the graph and captures the
+ * performance. \param [in] graph The graph structure. \param [in] index The
+ * index of the node to execute. \return Returns the status of the node.
  * \ingroup group_int_graph
  */
 vx_status ownExecuteNode(vx_graph graph, vx_uint32 index);
 /*!
- * \brief Recursively traverses the graph looking for cycles against the original
- * node.
- * \param [in] graph The graph to traverse.
- * \param [in] parentIndex Originating Node (to check against cycles). We starting
- * from a head node, pass VX_INT_MAX_REF.
- * \param [in] childIndex Subsequent Linked Node Index.
- * \ingroup group_int_graph
+ * \brief Recursively traverses the graph looking for cycles against the
+ * original node. \param [in] graph The graph to traverse. \param [in]
+ * parentIndex Originating Node (to check against cycles). We starting from a
+ * head node, pass VX_INT_MAX_REF. \param [in] childIndex Subsequent Linked Node
+ * Index. \ingroup group_int_graph
  */
-vx_status ownTraverseGraph(vx_graph graph,
-                          vx_uint32 parentIndex,
-                          vx_uint32 childIndex);
+vx_status ownTraverseGraph(vx_graph graph, vx_uint32 parentIndex,
+                           vx_uint32 childIndex);
 
 /*! \brief Given a set of last nodes, this function will determine the next
  * set of nodes which are capable of being run. Nodes which are encountered but
  * can't be run will be placed in the left nodes list.
  * \param [in] graph The graph structure.
  * \param [in] last_nodes The last list of nodes executed.
- * \param [in] numLast The number of nodes in the last_nodes list which are valid.
- * \param [out] next_nodes The list of nodes next to be executed.
- * \param [in] numNext The number of nodes in the next_nodes list which are valid.
- * \param [out] left_nodes The list of nodes which are next, but can't be executed.
- * \param [in] numLeft The number of nodes in the left_nodes list which are valid.
- * \ingroup group_int_graph
+ * \param [in] numLast The number of nodes in the last_nodes list which are
+ * valid. \param [out] next_nodes The list of nodes next to be executed. \param
+ * [in] numNext The number of nodes in the next_nodes list which are valid.
+ * \param [out] left_nodes The list of nodes which are next, but can't be
+ * executed. \param [in] numLeft The number of nodes in the left_nodes list
+ * which are valid. \ingroup group_int_graph
  */
-void ownFindNextNodes(vx_graph graph,
-                      vx_uint32 last_nodes[VX_INT_MAX_REF], vx_uint32 numLast,
-                      vx_uint32 next_nodes[VX_INT_MAX_REF], vx_uint32 *numNext,
-                      vx_uint32 left_nodes[VX_INT_MAX_REF], vx_uint32 *numLeft);
+void ownFindNextNodes(vx_graph graph, vx_uint32 last_nodes[VX_INT_MAX_REF],
+                      vx_uint32 numLast, vx_uint32 next_nodes[VX_INT_MAX_REF],
+                      vx_uint32 *numNext, vx_uint32 left_nodes[VX_INT_MAX_REF],
+                      vx_uint32 *numLeft);
 
 /*! \brief This function finds all graph which contain input or bidirectional
  * access to the reference and marks them as unverified.

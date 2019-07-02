@@ -23,22 +23,22 @@
 
 /*! \ingroup group_example */
 enum vx_factory_name_e {
-    VX_GRAPH_FACTORY_EDGE,
-    VX_GRAPH_FACTORY_CORNERS,
-    VX_GRAPH_FACTORY_PIPELINE,
+  VX_GRAPH_FACTORY_EDGE,
+  VX_GRAPH_FACTORY_CORNERS,
+  VX_GRAPH_FACTORY_PIPELINE,
 };
 
 /*! \brief An prototype of a graph factory method.
  * \ingroup group_example
  */
-typedef vx_graph(*vx_graph_factory_f)(vx_context context);
+typedef vx_graph (*vx_graph_factory_f)(vx_context context);
 
 /*! \brief A graph factory structure.
  * \ingroup group_example
  */
 typedef struct _vx_graph_factory_t {
-    vx_enum factory_name;
-    vx_graph_factory_f factory;
+  vx_enum factory_name;
+  vx_graph_factory_f factory;
 } vx_graph_factory_t;
 
 // PROTOTYPES

@@ -35,10 +35,9 @@
  */
 void ownPrintTarget(vx_target_t *target, vx_uint32 index);
 
-/*! \brief This allows the implementation to load a target interface into OpenVX.
- * \param [in] context The overall context pointer.
- * \param [in] name The shortened name of the target module.
- * \ingroup group_int_target
+/*! \brief This allows the implementation to load a target interface into
+ * OpenVX. \param [in] context The overall context pointer. \param [in] name The
+ * shortened name of the target module. \ingroup group_int_target
  */
 vx_status ownLoadTarget(vx_context_t *context, vx_char *name);
 
@@ -47,7 +46,8 @@ vx_status ownLoadTarget(vx_context_t *context, vx_char *name);
  * \param [in] index The index into the context's target array.
  * \ingroup group_int_target
  */
-vx_status ownUnloadTarget(vx_context_t *context, vx_uint32 index, vx_bool unload_module);
+vx_status ownUnloadTarget(vx_context_t *context, vx_uint32 index,
+                          vx_bool unload_module);
 
 /*! \brief Initializes a target's kernels list.
  * \param [in] target The pointer to the target struct.
@@ -55,7 +55,9 @@ vx_status ownUnloadTarget(vx_context_t *context, vx_uint32 index, vx_bool unload
  * \param [in] numkernels The length of the kernels list.
  * \ingroup group_int_target
  */
-vx_status ownInitializeTarget(vx_target_t *target, vx_kernel_description_t *kernels[], vx_uint32 numkernels);
+vx_status ownInitializeTarget(vx_target_t *target,
+                              vx_kernel_description_t *kernels[],
+                              vx_uint32 numkernels);
 
 /*! \brief Deinitializes a target's kernels list.
  * \param [in] target The pointer to the target struct.
@@ -71,6 +73,7 @@ vx_status ownDeinitializeTarget(vx_target_t *target);
  * \ingroup group_int_target
  * \retval vx_true_e If string matches, vx_false_e if not.
  */
-vx_bool ownMatchTargetNameWithString(const char* target_name, const char* target_string);
+vx_bool ownMatchTargetNameWithString(const char *target_name,
+                                     const char *target_string);
 
 #endif

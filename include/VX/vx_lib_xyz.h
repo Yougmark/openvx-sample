@@ -47,27 +47,28 @@
 /*! \brief The minimum value of the scalar for the XYZ Kernel.
  * \ingroup group_xyz_ext
  */
-#define XYZ_VALUE_MIN   (-10)
+#define XYZ_VALUE_MIN (-10)
 
 /*! \brief The maximum value of the scalar for the XYZ Kernel.
  * \ingroup group_xyz_ext
  */
-#define XYZ_VALUE_MAX  (10)
+#define XYZ_VALUE_MAX (10)
 
 //! [KERNEL ENUM]
 #define VX_KERNEL_NAME_KHR_XYZ "org.khronos.example.xyz"
 /*! \brief The XYZ Example Library Set
  * \ingroup group_xyz_ext
  */
-#define VX_LIBRARY_XYZ (0x3) // assigned from Khronos, vendors control their own
+#define VX_LIBRARY_XYZ \
+  (0x3)  // assigned from Khronos, vendors control their own
 
 /*! \brief The list of XYZ Kernels.
  * \ingroup group_xyz_ext
  */
 enum vx_kernel_xyz_ext_e {
-    /*! \brief The Example User Defined Kernel */
-    VX_KERNEL_KHR_XYZ = VX_KERNEL_BASE(VX_ID_DEFAULT, VX_LIBRARY_XYZ) + 0x0,
-    // up to 0xFFF kernel enums can be created.
+  /*! \brief The Example User Defined Kernel */
+  VX_KERNEL_KHR_XYZ = VX_KERNEL_BASE(VX_ID_DEFAULT, VX_LIBRARY_XYZ) + 0x0,
+  // up to 0xFFF kernel enums can be created.
 };
 //! [KERNEL ENUM]
 
@@ -86,12 +87,13 @@ extern "C" {
  * every iteration.
  * \ingroup group_example_kernel
  */
-vx_node vxXYZNode(vx_graph graph, vx_image input, vx_uint32 value, vx_image output, vx_array temp);
+vx_node vxXYZNode(vx_graph graph, vx_image input, vx_uint32 value,
+                  vx_image output, vx_array temp);
 //! [node]
 
 //! [vxu]
-/*! \brief [Immediate] This is an example of an immediate mode version of the XYZ node.
- * \param [in] context The overall context of the implementation.
+/*! \brief [Immediate] This is an example of an immediate mode version of the
+ * XYZ node. \param [in] context The overall context of the implementation.
  * \param [in] input The input image.
  * \param [in] value The input scalar value
  * \param [out] output The output image.
@@ -99,7 +101,8 @@ vx_node vxXYZNode(vx_graph graph, vx_image input, vx_uint32 value, vx_image outp
  * every iteration.
  * \ingroup group_example_kernel
  */
-vx_status vxuXYZ(vx_context context, vx_image input, vx_uint32 value, vx_image output, vx_array temp);
+vx_status vxuXYZ(vx_context context, vx_image input, vx_uint32 value,
+                 vx_image output, vx_array temp);
 //! [vxu]
 
 #ifdef __cplusplus

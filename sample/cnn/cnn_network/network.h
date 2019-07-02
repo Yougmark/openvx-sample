@@ -18,26 +18,26 @@
 #define _CNN_NETWORK_H_
 //#define EXPERIMENTAL_PLATFORM_SUPPORTS_16_FLOAT
 
-#ifdef  __cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
-#define Q78_FIXED_POINT_POSITION						8
+#define Q78_FIXED_POINT_POSITION 8
 
-#include <stdint.h>
 #include <VX/vx.h>
-
+#include <stdint.h>
 
 float short2float(int16_t val);
 int Overfeat(int16_t** ppdata, vx_enum format, vx_int8 fp_pos, bool raw,
-		int16_t *output);
-int Alexnet(int16_t** ppdata, bool raw, int16_t *output);
-int Googlenet2(int16_t** ppdata, vx_enum format, vx_uint8 fp_pos, bool raw, bool immediate, int16_t *output);
-//int BDS(int16_t** ppdata, bool raw, bool immediate, int16_t *output);
-//int Test();
+             int16_t* output);
+int Alexnet(int16_t** ppdata, bool raw, int16_t* output);
+int Googlenet2(int16_t** ppdata, vx_enum format, vx_uint8 fp_pos, bool raw,
+               bool immediate, int16_t* output);
+// int BDS(int16_t** ppdata, bool raw, bool immediate, int16_t *output);
+// int Test();
 
-#ifdef  __cplusplus
+#ifdef __cplusplus
 }
 #endif
 
-#endif //_CNN_NETWORK_H_
+#endif  //_CNN_NETWORK_H_

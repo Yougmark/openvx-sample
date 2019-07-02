@@ -39,12 +39,8 @@ void ownReleasePyramidInt(vx_pyramid pyramid);
 /*! \brief Initializes the internals of a pyramid structure
  * \ingroup group_int_pyramid
  */
-vx_status ownInitPyramid(vx_pyramid pyramid,
-                        vx_size levels,
-                        vx_float32 scale,
-                        vx_uint32 width,
-                        vx_uint32 height,
-                        vx_df_image format);
+vx_status ownInitPyramid(vx_pyramid pyramid, vx_size levels, vx_float32 scale,
+                         vx_uint32 width, vx_uint32 height, vx_df_image format);
 
 /*! \brief Destroys a pyrmid object.
  * \ingroup group_int_pyramid

@@ -18,56 +18,60 @@
 #include <VX/vx.h>
 #include <stdlib.h>
 
-vx_status vx_example_introspection()
-{
-    //! [context]
-    vx_context context = vxCreateContext();
-    //! [context]
-    //! [num]
-    vx_size k, num_kernels = 0;
-    vx_status status = vxQueryContext(context, VX_CONTEXT_UNIQUE_KERNELS, &num_kernels, sizeof(num_kernels));
-    //! [num]
-    if (num_kernels > 0) {
+vx_status vx_example_introspection() {
+  //! [context]
+  vx_context context = vxCreateContext();
+  //! [context]
+  //! [num]
+  vx_size k, num_kernels = 0;
+  vx_status status = vxQueryContext(context, VX_CONTEXT_UNIQUE_KERNELS,
+                                    &num_kernels, sizeof(num_kernels));
+  //! [num]
+  if (num_kernels > 0) {
     //! [malloc]
     vx_size size = num_kernels * sizeof(vx_kernel_info_t);
     vx_kernel_info_t *table = (vx_kernel_info_t *)malloc(size);
-    status = vxQueryContext(context, VX_CONTEXT_UNIQUE_KERNEL_TABLE, table, size);
+    status =
+        vxQueryContext(context, VX_CONTEXT_UNIQUE_KERNEL_TABLE, table, size);
     //! [malloc]
 
     //! [kernel_loop]
     for (k = 0; k < num_kernels; k++)
     //! [kernel_loop]
     {
-        //! [kernel]
-        vx_kernel kernel = vxGetKernelByName(context, table[k].name);
-        //! [kernel]
-        //! [kernel_attr]
-        vx_uint32 p, num_params = 0u;
-        status = vxQueryKernel(kernel, VX_KERNEL_PARAMETERS, &num_params, sizeof(num_params));
-        //! [kernel_attr]
-        if (status == VX_SUCCESS)
+      //! [kernel]
+      vx_kernel kernel = vxGetKernelByName(context, table[k].name);
+      //! [kernel]
+      //! [kernel_attr]
+      vx_uint32 p, num_params = 0u;
+      status = vxQueryKernel(kernel, VX_KERNEL_PARAMETERS, &num_params,
+                             sizeof(num_params));
+      //! [kernel_attr]
+      if (status == VX_SUCCESS) {
+        //! [parameter_loop]
+        for (p = 0; p < num_params; p++)
+        //! [parameter_loop]
         {
-            //! [parameter_loop]
-            for (p = 0; p < num_params; p++)
-            //! [parameter_loop]
-            {
-                //! [parameter]
-                vx_parameter param = vxGetKernelParameterByIndex(kernel, p);
-                //! [parameter]
+          //! [parameter]
+          vx_parameter param = vxGetKernelParameterByIndex(kernel, p);
+          //! [parameter]
 
-                //! [parameter_attr]
-                vx_enum dir, state, type;
-                status = vxQueryParameter(param, VX_PARAMETER_DIRECTION, &dir, sizeof(dir));
-                status = vxQueryParameter(param, VX_PARAMETER_STATE, &state, sizeof(state));
-                status = vxQueryParameter(param, VX_PARAMETER_TYPE, &type, sizeof(type));
-                //! [parameter_attr]
-            }
+          //! [parameter_attr]
+          vx_enum dir, state, type;
+          status = vxQueryParameter(param, VX_PARAMETER_DIRECTION, &dir,
+                                    sizeof(dir));
+          status = vxQueryParameter(param, VX_PARAMETER_STATE, &state,
+                                    sizeof(state));
+          status =
+              vxQueryParameter(param, VX_PARAMETER_TYPE, &type, sizeof(type));
+          //! [parameter_attr]
         }
-        vxReleaseKernel(&kernel);
+      }
+      vxReleaseKernel(&kernel);
     }
-    }
-    //! [teardown]
-    vxReleaseContext(&context);
-    //! [teardown]
-    return status;
+  }
+  //! [teardown]
+  vxReleaseContext(&context);
+  //! [teardown]
+  return status;
 }

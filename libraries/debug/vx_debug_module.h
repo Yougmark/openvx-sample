@@ -24,6 +24,8 @@
 #ifndef _VX_DEBUG_MODULE_H_
 #define _VX_DEBUG_MODULE_H_
 
+#include <VX/vx_helper.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -44,4 +46,3 @@ extern vx_kernel_description_t compare_images_kernel;
 #endif
 
 #endif /* _VX_DEBUG_MODULE_H_ */
-
