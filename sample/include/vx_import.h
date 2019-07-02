@@ -18,6 +18,8 @@
 #ifndef _OPENVX_INT_IMPORT_H_
 #define _OPENVX_INT_IMPORT_H_
 
+#include "vx_internal.h"
+
 #include <VX/vx.h>
 
 /*!
@@ -31,7 +33,6 @@
  */
 
 #if defined(OPENVX_USE_IX) || defined(OPENVX_USE_XML)
-
 
 /*! \brief Create an import object.
  * \param [in] context The context.
