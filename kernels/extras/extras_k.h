@@ -25,8 +25,10 @@
 extern "C" {
 #endif
 
-vx_status ownEuclideanNonMaxSuppressionHarris(vx_image src, vx_scalar thr, vx_scalar rad, vx_image dst);
-vx_status ownNonMaxSuppression(vx_image i_mag, vx_image i_ang, vx_image i_edge, vx_border_t* bordermode);
+vx_status ownEuclideanNonMaxSuppressionHarris(vx_image src, vx_scalar thr,
+                                              vx_scalar rad, vx_image dst);
+vx_status ownNonMaxSuppression(vx_image i_mag, vx_image i_ang, vx_image i_edge,
+                               vx_border_t* bordermode);
 vx_status ownLaplacian3x3(vx_image src, vx_image dst, vx_border_t* bordermode);
 
 #ifdef __cplusplus

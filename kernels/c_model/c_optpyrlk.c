@@ -18,10 +18,8 @@
 #include <c_model.h>
 
 // nodeless version of the OpticalFlowPyrLK kernel
-vx_status vxOpticalFlowPyrLK(/*p1, p2, p3...*/)
-{
-    // <code>
+vx_status vxOpticalFlowPyrLK(/*p1, p2, p3...*/) {
+  // <code>
 
-    return VX_ERROR_NOT_IMPLEMENTED;
+  return VX_ERROR_NOT_IMPLEMENTED;
 }
-
