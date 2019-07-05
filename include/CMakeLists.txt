@@ -69,6 +69,7 @@ add_custom_target(openvx-header-packages ${_INCLUDE_TO_ALL} DEPENDS
 endif()
 
 # Get the list of headers files for the IDE
-file( GLOB HEADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/VX/*.h ${CMAKE_SOURCE_DIR}/api-docs/include/VX/*.h)
+file( GLOB HEADER_FILES ${CMAKE_CURRENT_SOURCE_DIR}/VX/*.h ${CMAKE_SOURCE_DIR}/api-docs/include/VX/*.h ${CMAKE_CURRENT_SOURCE_DIR}/*.h )
+file( GLOB SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.c )
 set( LIST_OF_VX_HEADER_FILES ${HEADER_FILES} PARENT_SCOPE )
 set( VX_HEADER_DIR ${CMAKE_SOURCE_DIR}/api-docs/include ${CMAKE_CURRENT_SOURCE_DIR} PARENT_SCOPE)
