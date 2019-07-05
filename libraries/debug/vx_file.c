@@ -296,7 +296,8 @@ own_fread_image_validator(vx_node node, const vx_reference parameters[],
                   vx_char shortname[256] = {0};
                   vx_char fmt[5] = {0};
                   vx_int32 cbps = 0;
-                  sscanf(filename, "%256[a-zA-Z]_%ux%u_%4[A-Z0-9]_%db.bw",
+                  //sscanf(filename, "%256[a-zA-Z]_%ux%u_%4[A-Z0-9]_%db.bw",
+                  sscanf(filename, "%256[a-zA-Z\./_]%ux%u_%4[A-Z0-9]_%db.bw",
                          shortname, &width, &height, fmt, &cbps);
                   if (strcmp(fmt, "P400") == 0) {
                     format = VX_DF_IMAGE_U8;
@@ -305,7 +306,7 @@ own_fread_image_validator(vx_node node, const vx_reference parameters[],
                   vx_char shortname[256] = {0};
                   vx_char fmt[5] = {0};
                   vx_int32 cbps = 0;
-                  sscanf(filename, "%256[a-zA-Z]_%ux%u_%4[A-Z0-9]_%db.bw",
+                  sscanf(filename, "%256[a-zA-Z\./_]%ux%u_%4[A-Z0-9]_%db.yuv",
                          shortname, &width, &height, fmt, &cbps);
                   if (strcmp(fmt, "IYUV") == 0) {
                     format = VX_DF_IMAGE_IYUV;
@@ -320,7 +321,8 @@ own_fread_image_validator(vx_node node, const vx_reference parameters[],
                   vx_char shortname[256] = {0};
                   vx_char fmt[5] = {0};
                   vx_int32 cbps = 0;
-                  sscanf(filename, "%256[a-zA-Z]_%ux%u_%4[A-Z0-9]_%db.rgb",
+                  //sscanf(filename, "%256[a-zA-Z]_%ux%u_%4[A-Z0-9]_%db.rgb",
+                  sscanf(filename, "%256[a-zA-Z\./_]%ux%u_%4[A-Z0-9]_%db.rgb",
                          shortname, &width, &height, fmt, &cbps);
                   if (strcmp(fmt, "I444") == 0) {
                     format = VX_DF_IMAGE_RGB;
