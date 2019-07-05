@@ -20,10 +20,10 @@ set( TARGET_NAME openvx )
 
 include_directories( BEFORE
                      ${CMAKE_CURRENT_SOURCE_DIR}
+                     ${CMAKE_CURRENT_SOURCE_DIR}/debug
                      ${CMAKE_SOURCE_DIR}/include
                      ${VX_HEADER_DIR}
                      ${CMAKE_SOURCE_DIR}/utils
-                     ${CMAKE_SOURCE_DIR}/debug
                      ${LIBXML2_INCLUDE_DIR})
 
 if ((WIN32) OR (CYGWIN))
@@ -77,3 +77,5 @@ install ( TARGETS ${TARGET_NAME}
 set_target_properties( ${TARGET_NAME} PROPERTIES FOLDER ${SAMPLE_FOLDER} )
 
 add_subdirectory( vxu )
+add_subdirectory( helper )
+add_subdirectory( debug )
