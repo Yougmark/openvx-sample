@@ -16,7 +16,6 @@
 
 add_subdirectory( include )
 add_subdirectory( tests )
-add_subdirectory( vxu )
 
 if (OPENVX_USE_NN)
 add_subdirectory( cnn )

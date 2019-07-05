@@ -75,3 +75,5 @@ install ( TARGETS ${TARGET_NAME}
           LIBRARY DESTINATION bin )
 
 set_target_properties( ${TARGET_NAME} PROPERTIES FOLDER ${SAMPLE_FOLDER} )
+
+add_subdirectory( vxu )
