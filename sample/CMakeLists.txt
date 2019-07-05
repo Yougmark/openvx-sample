@@ -15,8 +15,6 @@
 #
 
 add_subdirectory( include )
-#add_subdirectory( framework )
-add_subdirectory( targets )
 add_subdirectory( tests )
 add_subdirectory( vxu )
 
