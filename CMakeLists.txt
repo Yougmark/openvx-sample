@@ -152,11 +152,8 @@ set( TOOLS_FOLDER Tools )
 
 
 add_subdirectory( include )
-add_subdirectory( debug )
-add_subdirectory( examples )
-add_subdirectory( helper )
+add_subdirectory( framework )
 add_subdirectory( kernels )
 add_subdirectory( libraries )
 add_subdirectory( sample )
 add_subdirectory( tools )
-add_subdirectory( utils )

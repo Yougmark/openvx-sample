@@ -371,6 +371,5 @@ sample implementation, bug reports can be reported back to the working
 group in an effort to make sure that we don't overlook related specification
 and implementation issues going forward.
 
-If any bugs are found in the sample implementation, you can notify the
-Khronos working group via the OpenVX feedback forum:
-    https://www.khronos.org/openvx/feedback_forum
+If any bugs are found in the sample implementation, you can submit issues in
+this GitHub repository.

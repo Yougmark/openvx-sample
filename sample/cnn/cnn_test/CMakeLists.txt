@@ -17,7 +17,7 @@
 include_directories( BEFORE
     ${VX_HEADER_DIR}
     ${SAMPLE_HEADER_DIR}
-    ${CMAKE_SOURCE_DIR}/utils
+    ${CMAKE_SOURCE_DIR}/framework/utils
     ${CMAKE_CURRENT_SOURCE_DIR}/../cnn_network
     )
 

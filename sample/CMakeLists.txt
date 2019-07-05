@@ -14,11 +14,8 @@
 # limitations under the License.
 #
 
-add_subdirectory( include )
-add_subdirectory( framework )
-add_subdirectory( targets )
 add_subdirectory( tests )
-add_subdirectory( vxu )
+add_subdirectory( examples )
 
 if (OPENVX_USE_NN)
 add_subdirectory( cnn )

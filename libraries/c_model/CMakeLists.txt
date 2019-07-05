@@ -20,11 +20,11 @@ set( TARGET_NAME openvx-c_model )
 
 include_directories( BEFORE
                      ${CMAKE_CURRENT_SOURCE_DIR}
-                     ${CMAKE_CURRENT_SOURCE_DIR}/../../include
+                     ${CMAKE_SOURCE_DIR}/include
                      ${VX_HEADER_DIR}
                      ${CMAKE_SOURCE_DIR}/kernels/c_model
-                     ${CMAKE_SOURCE_DIR}/debug
-                     ${CMAKE_SOURCE_DIR}/utils
+                     ${CMAKE_SOURCE_DIR}/framework/debug
+                     ${CMAKE_SOURCE_DIR}/framework/utils
                      )
 
 FIND_SOURCES()

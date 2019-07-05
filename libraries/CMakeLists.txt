@@ -17,4 +17,4 @@
 
 add_subdirectory( debug )
 add_subdirectory( extras )
-
+add_subdirectory( c_model )
