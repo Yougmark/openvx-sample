@@ -15,6 +15,7 @@
 #
 
 add_subdirectory( tests )
+add_subdirectory( examples )
 
 if (OPENVX_USE_NN)
 add_subdirectory( cnn )
