@@ -24,7 +24,7 @@ include_directories( BEFORE
                      ${VX_HEADER_DIR}
                      ${CMAKE_SOURCE_DIR}/kernels/c_model
                      ${CMAKE_SOURCE_DIR}/framework/debug
-                     ${CMAKE_SOURCE_DIR}/utils
+                     ${CMAKE_SOURCE_DIR}/framework/utils
                      )
 
 FIND_SOURCES()

@@ -21,7 +21,7 @@ set( TARGET_NAME openvx-c_model-lib )
 include_directories( BEFORE
                      ${CMAKE_CURRENT_SOURCE_DIR}
                      ${VX_HEADER_DIR}
-                     ${CMAKE_SOURCE_DIR}/utils
+                     ${CMAKE_SOURCE_DIR}/framework/utils
                      ${CMAKE_SOURCE_DIR}/framework/debug )
 
 FIND_SOURCES()
